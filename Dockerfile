@@ -17,11 +17,13 @@ RUN npm run build
 FROM base AS runner
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
-USER node
 
-COPY --from=builder /app/public ./public
+# Kopiere statische Assets direkt aus dem Build-Kontext, damit Portainer-/Build-Caches keine fehlenden Artefakte liefern
+COPY public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+USER node
 
 EXPOSE 3000
 CMD ["node", "server.js"]
