@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    command: ["node", "server.js"]
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
