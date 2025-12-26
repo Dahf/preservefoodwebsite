@@ -10,22 +10,22 @@ import {
 export const BLUR_FADE_DELAY = 0.15;
 
 export const siteConfig = {
-  name: "Cal AI",
-  description: "Smart scheduling powered by AI. Perfect for quick note-taking, content creation, and capturing ideas on-the-go.",
-  cta: "Get Started",
+  name: "Preserve Food",
+  description: "Preserve Food ist eine App, die es dir ermöglicht, deine Lebensmittel zu verwalten und zu sichern.",
+  cta: "Los geht's",
   url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   keywords: [
-    "AI Calendar",
-    "Smart Scheduling",
-    "Productivity",
-    "Time Management",
+    "Preserve Food",
+    "Lebensmittel",
+    "Verwalten",
+    "Sichern",  
   ],
   links: {
-    email: "support@calai.app",
+    email: "mail@preservefood.de",
     twitter: "https://twitter.com/calaiapp",
-    discord: "https://discord.gg/calaiapp",
-    github: "https://github.com/calaiapp",
-    instagram: "https://instagram.com/calaiapp",
+    discord: "https://discord.gg/preservefood",
+    github: "https://github.com/preservefood",
+    instagram: "https://instagram.com/preservefood",
   },
   features: [
     {
