@@ -8,7 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select } from "@/components/ui/select"
 import { Card } from "@/components/ui/card"
-import { createMeal, searchIngredients } from "../../actions"
+import { createMeal } from "../../actions"
+import IngredientSelector from "@/components/admin/ingredient-selector"
 
 type IngredientInput = {
   ingredientid: number
@@ -37,9 +38,6 @@ export default function NewRecipe() {
 
   // Zutaten
   const [ingredients, setIngredients] = useState<IngredientInput[]>([])
-  const [ingredientSearch, setIngredientSearch] = useState("")
-  const [searchResults, setSearchResults] = useState<any[]>([])
-  const [showSearch, setShowSearch] = useState(false)
 
   // Nährwerte
   const [calories, setCalories] = useState("")
@@ -49,57 +47,6 @@ export default function NewRecipe() {
   const [sodium, setSodium] = useState("")
   const [sugar, setSugar] = useState("")
   const [energy, setEnergy] = useState("")
-
-  const handleSearchIngredients = async (query: string) => {
-    setIngredientSearch(query)
-    if (query.length > 1) {
-      const result = await searchIngredients(query)
-      if (result.success) {
-        setSearchResults(result.data)
-        setShowSearch(true)
-      }
-    } else {
-      setSearchResults([])
-      setShowSearch(false)
-    }
-  }
-
-  const addIngredient = (ingredient: any) => {
-    if (!ingredients.find((i) => i.ingredientid === ingredient.id)) {
-      setIngredients([
-        ...ingredients,
-        {
-          ingredientid: ingredient.id,
-          name: ingredient.name,
-          quantity: 0,
-          unit: "",
-        },
-      ])
-    }
-    setIngredientSearch("")
-    setSearchResults([])
-    setShowSearch(false)
-  }
-
-  const removeIngredient = (ingredientid: number) => {
-    setIngredients(ingredients.filter((i) => i.ingredientid !== ingredientid))
-  }
-
-  const updateIngredientQuantity = (ingredientid: number, quantity: number) => {
-    setIngredients(
-      ingredients.map((i) =>
-        i.ingredientid === ingredientid ? { ...i, quantity } : i
-      )
-    )
-  }
-
-  const updateIngredientUnit = (ingredientid: number, unit: string) => {
-    setIngredients(
-      ingredients.map((i) =>
-        i.ingredientid === ingredientid ? { ...i, unit } : i
-      )
-    )
-  }
 
   const addStep = () => {
     setSteps([...steps, ""])
@@ -159,66 +106,66 @@ export default function NewRecipe() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Neues Rezept erstellen</h1>
-        <p className="text-neutral-400">
+        <h1 className="text-4xl font-bold text-slate-900 mb-2">Neues Rezept erstellen</h1>
+        <p className="text-slate-600">
           Füge ein neues Rezept mit Zutaten und Schritten hinzu
         </p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded text-red-500">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded text-red-700">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basisdaten */}
-        <Card className="p-6 bg-neutral-900 border-neutral-800">
-          <h2 className="text-2xl font-bold mb-4">Grundinformationen</h2>
+        <Card className="p-6 bg-white border-slate-200">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Grundinformationen</h2>
           <div className="grid gap-4">
             <div>
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name" className="text-slate-900">Name *</Label>
               <Input
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
 
             <div>
-              <Label htmlFor="description">Beschreibung *</Label>
+              <Label htmlFor="description" className="text-slate-900">Beschreibung *</Label>
               <Textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 rows={3}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="category">Kategorie *</Label>
+                <Label htmlFor="category" className="text-slate-900">Kategorie *</Label>
                 <Input
                   id="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="z.B. Hauptgericht, Dessert"
                   required
-                  className="mt-1 bg-neutral-800 border-neutral-700"
+                  className="mt-1 bg-white border-slate-300 text-slate-900"
                 />
               </div>
 
               <div>
-                <Label htmlFor="difficulty">Schwierigkeit</Label>
+                <Label htmlFor="difficulty" className="text-slate-900">Schwierigkeit</Label>
                 <Select
                   id="difficulty"
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
-                  className="mt-1 bg-neutral-800 border-neutral-700"
+                  className="mt-1 bg-white border-slate-300 text-slate-900"
                 >
                   <option value="">Wählen...</option>
                   <option value="Einfach">Einfach</option>
@@ -230,143 +177,80 @@ export default function NewRecipe() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="time">Zeit (Minuten)</Label>
+                <Label htmlFor="time" className="text-slate-900">Zeit (Minuten)</Label>
                 <Input
                   id="time"
                   type="number"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                   placeholder="30"
-                  className="mt-1 bg-neutral-800 border-neutral-700"
+                  className="mt-1 bg-white border-slate-300 text-slate-900"
                 />
               </div>
 
               <div>
-                <Label htmlFor="servingsize">Portionsgröße *</Label>
+                <Label htmlFor="servingsize" className="text-slate-900">Portionsgröße *</Label>
                 <Input
                   id="servingsize"
                   value={servingsize}
                   onChange={(e) => setServingsize(e.target.value)}
                   placeholder="4 Personen"
                   required
-                  className="mt-1 bg-neutral-800 border-neutral-700"
+                  className="mt-1 bg-white border-slate-300 text-slate-900"
                 />
               </div>
             </div>
 
             <div>
-              <Label htmlFor="image">Bild-URL *</Label>
+              <Label htmlFor="image" className="text-slate-900">Bild-URL *</Label>
               <Input
                 id="image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
                 placeholder="https://..."
                 required
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
 
             <div>
-              <Label htmlFor="type">Typ</Label>
+              <Label htmlFor="type" className="text-slate-900">Typ</Label>
               <Input
                 id="type"
                 value={type}
                 onChange={(e) => setType(e.target.value)}
                 placeholder="z.B. Vegetarisch, Vegan"
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
           </div>
         </Card>
 
         {/* Zutaten */}
-        <Card className="p-6 bg-neutral-900 border-neutral-800">
-          <h2 className="text-2xl font-bold mb-4">Zutaten</h2>
-          
-          <div className="mb-4 relative">
-            <Label htmlFor="ingredient-search">Zutat hinzufügen</Label>
-            <Input
-              id="ingredient-search"
-              value={ingredientSearch}
-              onChange={(e) => handleSearchIngredients(e.target.value)}
-              placeholder="Suche nach Zutat..."
-              className="mt-1 bg-neutral-800 border-neutral-700"
-            />
-            
-            {showSearch && searchResults.length > 0 && (
-              <div className="absolute z-10 w-full mt-1 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg max-h-60 overflow-auto">
-                {searchResults.map((result) => (
-                  <button
-                    key={result.id}
-                    type="button"
-                    onClick={() => addIngredient(result)}
-                    className="w-full text-left px-4 py-2 hover:bg-neutral-700 transition-colors"
-                  >
-                    {result.name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            {ingredients.map((ingredient) => (
-              <div
-                key={ingredient.ingredientid}
-                className="flex items-center gap-2 p-3 bg-neutral-800 rounded"
-              >
-                <span className="flex-1">{ingredient.name}</span>
-                <Input
-                  type="number"
-                  step="0.01"
-                  value={ingredient.quantity || ""}
-                  onChange={(e) =>
-                    updateIngredientQuantity(
-                      ingredient.ingredientid,
-                      parseFloat(e.target.value)
-                    )
-                  }
-                  placeholder="Menge"
-                  className="w-24 bg-neutral-900 border-neutral-700"
-                />
-                <Input
-                  value={ingredient.unit || ""}
-                  onChange={(e) =>
-                    updateIngredientUnit(ingredient.ingredientid, e.target.value)
-                  }
-                  placeholder="Einheit"
-                  className="w-24 bg-neutral-900 border-neutral-700"
-                />
-                <Button
-                  type="button"
-                  onClick={() => removeIngredient(ingredient.ingredientid)}
-                  variant="outline"
-                  size="sm"
-                  className="border-neutral-700 hover:bg-red-500/10 hover:border-red-500"
-                >
-                  Entfernen
-                </Button>
-              </div>
-            ))}
-          </div>
+        <Card className="p-6 bg-white border-slate-200">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Zutaten</h2>
+          <IngredientSelector
+            selectedIngredients={ingredients}
+            onIngredientsChange={setIngredients}
+          />
         </Card>
 
         {/* Schritte */}
-        <Card className="p-6 bg-neutral-900 border-neutral-800">
-          <h2 className="text-2xl font-bold mb-4">Zubereitungsschritte</h2>
+        <Card className="p-6 bg-white border-slate-200">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Zubereitungsschritte</h2>
           
           <div className="space-y-3">
             {steps.map((step, index) => (
               <div key={index} className="flex gap-2">
                 <div className="flex-1">
-                  <Label htmlFor={`step-${index}`}>Schritt {index + 1}</Label>
+                  <Label htmlFor={`step-${index}`} className="text-slate-900">Schritt {index + 1}</Label>
                   <Textarea
                     id={`step-${index}`}
                     value={step}
                     onChange={(e) => updateStep(index, e.target.value)}
                     placeholder="Beschreibe diesen Schritt..."
                     rows={2}
-                    className="mt-1 bg-neutral-800 border-neutral-700"
+                    className="mt-1 bg-white border-slate-300 text-slate-900"
                   />
                 </div>
                 {steps.length > 1 && (
@@ -375,7 +259,7 @@ export default function NewRecipe() {
                     onClick={() => removeStep(index)}
                     variant="outline"
                     size="sm"
-                    className="mt-7 border-neutral-700 hover:bg-red-500/10 hover:border-red-500"
+                    className="mt-7 border-red-300 text-red-600 hover:bg-red-50"
                   >
                     Entfernen
                   </Button>
@@ -388,84 +272,84 @@ export default function NewRecipe() {
             type="button"
             onClick={addStep}
             variant="outline"
-            className="mt-4 border-neutral-700 hover:bg-neutral-800"
+            className="mt-4 border-slate-300 hover:bg-slate-50"
           >
             Schritt hinzufügen
           </Button>
         </Card>
 
         {/* Nährwerte */}
-        <Card className="p-6 bg-neutral-900 border-neutral-800">
-          <h2 className="text-2xl font-bold mb-4">Nährwerte (optional)</h2>
+        <Card className="p-6 bg-white border-slate-200">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Nährwerte (optional)</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <Label htmlFor="calories">Kalorien (kcal)</Label>
+              <Label htmlFor="calories" className="text-slate-900">Kalorien (kcal)</Label>
               <Input
                 id="calories"
                 type="number"
                 value={calories}
                 onChange={(e) => setCalories(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="carbohydrates">Kohlenhydrate (g)</Label>
+              <Label htmlFor="carbohydrates" className="text-slate-900">Kohlenhydrate (g)</Label>
               <Input
                 id="carbohydrates"
                 type="number"
                 value={carbohydrates}
                 onChange={(e) => setCarbohydrates(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="fat">Fett (g)</Label>
+              <Label htmlFor="fat" className="text-slate-900">Fett (g)</Label>
               <Input
                 id="fat"
                 type="number"
                 value={fat}
                 onChange={(e) => setFat(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="protein">Protein (g)</Label>
+              <Label htmlFor="protein" className="text-slate-900">Protein (g)</Label>
               <Input
                 id="protein"
                 type="number"
                 value={protein}
                 onChange={(e) => setProtein(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="sodium">Natrium (mg)</Label>
+              <Label htmlFor="sodium" className="text-slate-900">Natrium (mg)</Label>
               <Input
                 id="sodium"
                 type="number"
                 value={sodium}
                 onChange={(e) => setSodium(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="sugar">Zucker (g)</Label>
+              <Label htmlFor="sugar" className="text-slate-900">Zucker (g)</Label>
               <Input
                 id="sugar"
                 type="number"
                 value={sugar}
                 onChange={(e) => setSugar(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <Label htmlFor="energy">Energie (kJ)</Label>
+              <Label htmlFor="energy" className="text-slate-900">Energie (kJ)</Label>
               <Input
                 id="energy"
                 type="number"
                 value={energy}
                 onChange={(e) => setEnergy(e.target.value)}
-                className="mt-1 bg-neutral-800 border-neutral-700"
+                className="mt-1 bg-white border-slate-300 text-slate-900"
               />
             </div>
           </div>
@@ -475,7 +359,7 @@ export default function NewRecipe() {
           <Button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-white text-black hover:bg-neutral-200"
+            className="flex-1 bg-slate-900 text-white hover:bg-slate-800"
           >
             {loading ? "Wird erstellt..." : "Rezept erstellen"}
           </Button>
@@ -483,7 +367,7 @@ export default function NewRecipe() {
             type="button"
             onClick={() => router.back()}
             variant="outline"
-            className="border-neutral-700 hover:bg-neutral-800"
+            className="border-slate-300 hover:bg-slate-50"
           >
             Abbrechen
           </Button>

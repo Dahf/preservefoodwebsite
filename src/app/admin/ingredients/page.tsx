@@ -1,117 +1,125 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card } from "@/components/ui/card"
-import { createIngredient, getAllIngredients } from "../actions"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
+import { createIngredient, getAllIngredients } from "../actions";
 
 export default function IngredientsPage() {
-  const [ingredients, setIngredients] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [newIngredientName, setNewIngredientName] = useState("")
-  const [adding, setAdding] = useState(false)
-  const [error, setError] = useState("")
+  const [ingredients, setIngredients] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newIngredientName, setNewIngredientName] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    loadIngredients()
-  }, [])
+    loadIngredients();
+  }, []);
 
   const loadIngredients = async () => {
-    const result = await getAllIngredients()
+    const result = await getAllIngredients();
     if (result.success) {
-      setIngredients(result.data)
+      setIngredients(result.data);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const handleAddIngredient = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setAdding(true)
-    setError("")
+    e.preventDefault();
+    setAdding(true);
+    setError("");
 
-    const result = await createIngredient(newIngredientName)
-    
+    const result = await createIngredient(newIngredientName);
+
     if (result.success) {
-      setNewIngredientName("")
-      await loadIngredients()
+      setNewIngredientName("");
+      await loadIngredients();
     } else {
-      setError(result.error || "Fehler beim Hinzufügen der Zutat")
+      setError(result.error || "Fehler beim Hinzufügen der Zutat");
     }
-    
-    setAdding(false)
-  }
+
+    setAdding(false);
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Zutaten verwalten</h1>
-        <p className="text-neutral-400">
+        <h1 className="text-4xl font-bold text-slate-900 mb-2">
+          Zutaten verwalten
+        </h1>
+        <p className="text-slate-600">
           Füge neue Zutaten hinzu oder verwalte bestehende
         </p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded text-red-500">
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded text-red-700">
           {error}
         </div>
       )}
 
-      <Card className="p-6 bg-neutral-900 border-neutral-800 mb-8">
-        <h2 className="text-xl font-bold mb-4">Neue Zutat hinzufügen</h2>
+      <Card className="p-6 bg-white border-slate-200 mb-8">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">
+          Neue Zutat hinzufügen
+        </h2>
         <form onSubmit={handleAddIngredient} className="flex gap-4">
           <div className="flex-1">
-            <Label htmlFor="ingredient-name">Zutat Name</Label>
+            <Label htmlFor="ingredient-name" className="text-slate-900">
+              Zutat Name
+            </Label>
             <Input
               id="ingredient-name"
               value={newIngredientName}
               onChange={(e) => setNewIngredientName(e.target.value)}
               placeholder="z.B. Tomaten"
               required
-              className="mt-1 bg-neutral-800 border-neutral-700"
+              className="mt-1 bg-white border-slate-300 text-slate-900"
             />
           </div>
           <Button
             type="submit"
             disabled={adding}
-            className="mt-7 bg-white text-black hover:bg-neutral-200"
+            className="mt-7 bg-slate-900 text-white hover:bg-slate-800"
           >
             {adding ? "Wird hinzugefügt..." : "Hinzufügen"}
           </Button>
         </form>
       </Card>
 
-      <Card className="p-6 bg-neutral-900 border-neutral-800">
-        <h2 className="text-xl font-bold mb-4">
+      <Card className="p-6 bg-white border-slate-200">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">
           Alle Zutaten ({ingredients.length})
         </h2>
-        
+
         {loading ? (
-          <p className="text-neutral-400">Wird geladen...</p>
+          <p className="text-slate-600">Wird geladen...</p>
         ) : ingredients.length > 0 ? (
           <div className="grid gap-2 max-h-[600px] overflow-y-auto">
             {ingredients.map((ingredient) => (
               <div
                 key={ingredient.id}
-                className="flex items-center justify-between p-3 bg-neutral-800 rounded hover:bg-neutral-750 transition-colors"
+                className="flex items-center justify-between p-3 bg-slate-50 rounded hover:bg-slate-100 transition-colors border border-slate-200"
               >
                 <div>
-                  <span className="font-medium">{ingredient.name}</span>
-                  <span className="text-sm text-neutral-500 ml-2">
+                  <span className="font-medium text-slate-900">
+                    {ingredient.name}
+                  </span>
+                  <span className="text-sm text-slate-500 ml-2">
                     ID: {ingredient.id}
                   </span>
                 </div>
-                <span className="text-xs text-neutral-500">
-                  {new Date(ingredient.created_at).toLocaleDateString('de-DE')}
+                <span className="text-xs text-slate-500">
+                  {new Date(ingredient.created_at).toLocaleDateString("de-DE")}
                 </span>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-neutral-400">Noch keine Zutaten vorhanden</p>
+          <p className="text-slate-600">Noch keine Zutaten vorhanden</p>
         )}
       </Card>
     </div>
-  )
+  );
 }

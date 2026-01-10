@@ -1,38 +1,42 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 type Ingredient = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 type SelectedIngredient = {
-  ingredientid: number
-  name: string
-  quantity: number
-  unit: string
-}
+  ingredientid: number;
+  name: string;
+  quantity: number;
+  unit: string;
+};
 
 type Props = {
-  selectedIngredients: SelectedIngredient[]
-  onIngredientsChange: (ingredients: SelectedIngredient[]) => void
-}
+  selectedIngredients: SelectedIngredient[];
+  onIngredientsChange: (ingredients: SelectedIngredient[]) => void;
+};
 
-export default function IngredientSelector({ selectedIngredients, onIngredientsChange }: Props) {
-  const supabase = createClient()
-  const [searchTerm, setSearchTerm] = useState("")
-  const [searchResults, setSearchResults] = useState<Ingredient[]>([])
-  const [showResults, setShowResults] = useState(false)
+export default function IngredientSelector({
+  selectedIngredients,
+  onIngredientsChange,
+}: Props) {
+  const supabase = createClient();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<Ingredient[]>([]);
+  const [showResults, setShowResults] = useState(false);
+  const [creating, setCreating] = useState(false);
 
   useEffect(() => {
     if (searchTerm.length < 2) {
-      setSearchResults([])
-      return
+      setSearchResults([]);
+      return;
     }
 
     const searchIngredients = async () => {
@@ -40,21 +44,21 @@ export default function IngredientSelector({ selectedIngredients, onIngredientsC
         .from("ingredients")
         .select("id, name")
         .ilike("name", `%${searchTerm}%`)
-        .limit(10)
+        .limit(10);
 
       if (data) {
-        setSearchResults(data)
+        setSearchResults(data);
       }
-    }
+    };
 
-    const debounce = setTimeout(searchIngredients, 300)
-    return () => clearTimeout(debounce)
-  }, [searchTerm])
+    const debounce = setTimeout(searchIngredients, 300);
+    return () => clearTimeout(debounce);
+  }, [searchTerm]);
 
   const addIngredient = (ingredient: Ingredient) => {
     // Prüfe ob bereits hinzugefügt
-    if (selectedIngredients.some(i => i.ingredientid === ingredient.id)) {
-      return
+    if (selectedIngredients.some((i) => i.ingredientid === ingredient.id)) {
+      return;
     }
 
     onIngredientsChange([
@@ -65,45 +69,89 @@ export default function IngredientSelector({ selectedIngredients, onIngredientsC
         quantity: 0,
         unit: "",
       },
-    ])
-    setSearchTerm("")
-    setSearchResults([])
-    setShowResults(false)
-  }
+    ]);
+    setSearchTerm("");
+    setSearchResults([]);
+    setShowResults(false);
+  };
 
-  const updateIngredient = (index: number, field: "quantity" | "unit", value: string | number) => {
-    const updated = [...selectedIngredients]
-    updated[index] = { ...updated[index], [field]: value }
-    onIngredientsChange(updated)
-  }
+  const createAndAddIngredient = async () => {
+    if (!searchTerm.trim() || creating) return;
+
+    setCreating(true);
+
+    try {
+      // Erstelle neue Zutat
+      const { data, error } = await supabase
+        .from("ingredients")
+        .insert({ name: searchTerm.trim() })
+        .select()
+        .single();
+
+      if (error) {
+        alert("Fehler beim Erstellen der Zutat: " + error.message);
+        setCreating(false);
+        return;
+      }
+
+      if (data) {
+        // Füge die neue Zutat hinzu
+        addIngredient(data);
+      }
+    } catch (err) {
+      alert("Ein Fehler ist aufgetreten");
+    } finally {
+      setCreating(false);
+    }
+  };
+
+  const updateIngredient = (
+    index: number,
+    field: "quantity" | "unit",
+    value: string | number
+  ) => {
+    const updated = [...selectedIngredients];
+    updated[index] = { ...updated[index], [field]: value };
+    onIngredientsChange(updated);
+  };
 
   const removeIngredient = (index: number) => {
-    onIngredientsChange(selectedIngredients.filter((_, i) => i !== index))
-  }
+    onIngredientsChange(selectedIngredients.filter((_, i) => i !== index));
+  };
 
   return (
     <div className="space-y-4">
       <div className="relative">
-        <Label>Zutat suchen</Label>
-        <Input
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value)
-            setShowResults(true)
-          }}
-          onFocus={() => setShowResults(true)}
-          className="mt-1 bg-neutral-800 border-neutral-700"
-          placeholder="Zutat eingeben..."
-        />
-        
+        <Label className="text-slate-900">Zutat suchen oder hinzufügen</Label>
+        <div className="flex gap-2 mt-1">
+          <Input
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setShowResults(true);
+            }}
+            onFocus={() => setShowResults(true)}
+            className="flex-1 bg-white border-slate-300 text-slate-900"
+            placeholder="Zutat eingeben..."
+          />
+          <Button
+            type="button"
+            onClick={createAndAddIngredient}
+            disabled={!searchTerm.trim() || creating}
+            className="bg-green-600 hover:bg-green-700 text-white"
+          >
+            {creating ? "..." : "Neu erstellen"}
+          </Button>
+        </div>
+
         {showResults && searchResults.length > 0 && (
-          <div className="absolute z-10 w-full mt-1 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg max-h-60 overflow-y-auto">
+          <div className="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
             {searchResults.map((ingredient) => (
               <button
                 key={ingredient.id}
                 type="button"
                 onClick={() => addIngredient(ingredient)}
-                className="w-full px-4 py-2 text-left hover:bg-neutral-700 transition"
+                className="w-full px-4 py-2 text-left text-slate-900 hover:bg-slate-100 transition"
               >
                 {ingredient.name}
               </button>
@@ -114,33 +162,44 @@ export default function IngredientSelector({ selectedIngredients, onIngredientsC
 
       {selectedIngredients.length > 0 && (
         <div className="space-y-3">
-          <Label>Ausgewählte Zutaten</Label>
+          <Label className="text-slate-900">Ausgewählte Zutaten</Label>
           {selectedIngredients.map((ingredient, index) => (
-            <div key={index} className="flex gap-2 items-end">
+            <div
+              key={index}
+              className="flex gap-2 items-end p-3 bg-slate-50 rounded-lg border border-slate-200"
+            >
               <div className="flex-1">
                 <Input
                   value={ingredient.name}
                   disabled
-                  className="bg-neutral-800 border-neutral-700"
+                  className="bg-white border-slate-300 text-slate-900"
                 />
               </div>
               <div className="w-24">
-                <Label className="text-xs">Menge</Label>
+                <Label className="text-xs text-slate-700">Menge</Label>
                 <Input
                   type="number"
                   step="0.01"
                   value={ingredient.quantity || ""}
-                  onChange={(e) => updateIngredient(index, "quantity", parseFloat(e.target.value) || 0)}
-                  className="bg-neutral-800 border-neutral-700"
+                  onChange={(e) =>
+                    updateIngredient(
+                      index,
+                      "quantity",
+                      parseFloat(e.target.value) || 0
+                    )
+                  }
+                  className="bg-white border-slate-300 text-slate-900"
                   placeholder="100"
                 />
               </div>
               <div className="w-24">
-                <Label className="text-xs">Einheit</Label>
+                <Label className="text-xs text-slate-700">Einheit</Label>
                 <Input
                   value={ingredient.unit}
-                  onChange={(e) => updateIngredient(index, "unit", e.target.value)}
-                  className="bg-neutral-800 border-neutral-700"
+                  onChange={(e) =>
+                    updateIngredient(index, "unit", e.target.value)
+                  }
+                  className="bg-white border-slate-300 text-slate-900"
                   placeholder="g"
                 />
               </div>
@@ -148,7 +207,7 @@ export default function IngredientSelector({ selectedIngredients, onIngredientsC
                 type="button"
                 onClick={() => removeIngredient(index)}
                 variant="outline"
-                className="border-neutral-700 hover:bg-red-500/10 hover:border-red-500"
+                className="border-red-300 text-red-600 hover:bg-red-50"
               >
                 Entfernen
               </Button>
@@ -157,5 +216,5 @@ export default function IngredientSelector({ selectedIngredients, onIngredientsC
         </div>
       )}
     </div>
-  )
+  );
 }
