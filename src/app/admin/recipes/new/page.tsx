@@ -1,69 +1,69 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select } from "@/components/ui/select"
-import { Card } from "@/components/ui/card"
-import { createMeal } from "../../actions"
-import IngredientSelector from "@/components/admin/ingredient-selector"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select } from "@/components/ui/select";
+import { Card } from "@/components/ui/card";
+import { createMeal } from "../../actions";
+import IngredientSelector from "@/components/admin/ingredient-selector";
 
 type IngredientInput = {
-  ingredientid: number
-  name: string
-  quantity?: number
-  unit?: string
-}
+  ingredientid: number;
+  name: string;
+  quantity: number;
+  unit: string;
+};
 
 export default function NewRecipe() {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Basisdaten
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("")
-  const [difficulty, setDifficulty] = useState("")
-  const [time, setTime] = useState("")
-  const [servingsize, setServingsize] = useState("")
-  const [image, setImage] = useState("")
-  const [type, setType] = useState("")
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [time, setTime] = useState("");
+  const [servingsize, setServingsize] = useState("");
+  const [image, setImage] = useState("");
+  const [type, setType] = useState("");
 
   // Schritte
-  const [steps, setSteps] = useState<string[]>([""])
+  const [steps, setSteps] = useState<string[]>([""]);
 
   // Zutaten
-  const [ingredients, setIngredients] = useState<IngredientInput[]>([])
+  const [ingredients, setIngredients] = useState<IngredientInput[]>([]);
 
   // Nährwerte
-  const [calories, setCalories] = useState("")
-  const [carbohydrates, setCarbohydrates] = useState("")
-  const [fat, setFat] = useState("")
-  const [protein, setProtein] = useState("")
-  const [sodium, setSodium] = useState("")
-  const [sugar, setSugar] = useState("")
-  const [energy, setEnergy] = useState("")
+  const [calories, setCalories] = useState("");
+  const [carbohydrates, setCarbohydrates] = useState("");
+  const [fat, setFat] = useState("");
+  const [protein, setProtein] = useState("");
+  const [sodium, setSodium] = useState("");
+  const [sugar, setSugar] = useState("");
+  const [energy, setEnergy] = useState("");
 
   const addStep = () => {
-    setSteps([...steps, ""])
-  }
+    setSteps([...steps, ""]);
+  };
 
   const removeStep = (index: number) => {
-    setSteps(steps.filter((_, i) => i !== index))
-  }
+    setSteps(steps.filter((_, i) => i !== index));
+  };
 
   const updateStep = (index: number, value: string) => {
-    setSteps(steps.map((s, i) => (i === index ? value : s)))
-  }
+    setSteps(steps.map((s, i) => (i === index ? value : s)));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
       const result = await createMeal({
@@ -88,25 +88,27 @@ export default function NewRecipe() {
           quantity: i.quantity,
           unit: i.unit,
         })),
-      })
+      });
 
       if (result.success) {
-        router.push("/admin/dashboard")
-        router.refresh()
+        router.push("/admin/dashboard");
+        router.refresh();
       } else {
-        setError(result.error || "Fehler beim Erstellen des Rezepts")
-        setLoading(false)
+        setError(result.error || "Fehler beim Erstellen des Rezepts");
+        setLoading(false);
       }
     } catch (err) {
-      setError("Ein unerwarteter Fehler ist aufgetreten")
-      setLoading(false)
+      setError("Ein unerwarteter Fehler ist aufgetreten");
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-slate-900 mb-2">Neues Rezept erstellen</h1>
+        <h1 className="text-4xl font-bold text-slate-900 mb-2">
+          Neues Rezept erstellen
+        </h1>
         <p className="text-slate-600">
           Füge ein neues Rezept mit Zutaten und Schritten hinzu
         </p>
@@ -121,10 +123,14 @@ export default function NewRecipe() {
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basisdaten */}
         <Card className="p-6 bg-white border-slate-200">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Grundinformationen</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">
+            Grundinformationen
+          </h2>
           <div className="grid gap-4">
             <div>
-              <Label htmlFor="name" className="text-slate-900">Name *</Label>
+              <Label htmlFor="name" className="text-slate-900">
+                Name *
+              </Label>
               <Input
                 id="name"
                 value={name}
@@ -135,7 +141,9 @@ export default function NewRecipe() {
             </div>
 
             <div>
-              <Label htmlFor="description" className="text-slate-900">Beschreibung *</Label>
+              <Label htmlFor="description" className="text-slate-900">
+                Beschreibung *
+              </Label>
               <Textarea
                 id="description"
                 value={description}
@@ -148,7 +156,9 @@ export default function NewRecipe() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="category" className="text-slate-900">Kategorie *</Label>
+                <Label htmlFor="category" className="text-slate-900">
+                  Kategorie *
+                </Label>
                 <Input
                   id="category"
                   value={category}
@@ -160,7 +170,9 @@ export default function NewRecipe() {
               </div>
 
               <div>
-                <Label htmlFor="difficulty" className="text-slate-900">Schwierigkeit</Label>
+                <Label htmlFor="difficulty" className="text-slate-900">
+                  Schwierigkeit
+                </Label>
                 <Select
                   id="difficulty"
                   value={difficulty}
@@ -177,7 +189,9 @@ export default function NewRecipe() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="time" className="text-slate-900">Zeit (Minuten)</Label>
+                <Label htmlFor="time" className="text-slate-900">
+                  Zeit (Minuten)
+                </Label>
                 <Input
                   id="time"
                   type="number"
@@ -189,7 +203,9 @@ export default function NewRecipe() {
               </div>
 
               <div>
-                <Label htmlFor="servingsize" className="text-slate-900">Portionsgröße *</Label>
+                <Label htmlFor="servingsize" className="text-slate-900">
+                  Portionsgröße *
+                </Label>
                 <Input
                   id="servingsize"
                   value={servingsize}
@@ -202,7 +218,9 @@ export default function NewRecipe() {
             </div>
 
             <div>
-              <Label htmlFor="image" className="text-slate-900">Bild-URL *</Label>
+              <Label htmlFor="image" className="text-slate-900">
+                Bild-URL *
+              </Label>
               <Input
                 id="image"
                 value={image}
@@ -214,7 +232,9 @@ export default function NewRecipe() {
             </div>
 
             <div>
-              <Label htmlFor="type" className="text-slate-900">Typ</Label>
+              <Label htmlFor="type" className="text-slate-900">
+                Typ
+              </Label>
               <Input
                 id="type"
                 value={type}
@@ -237,13 +257,17 @@ export default function NewRecipe() {
 
         {/* Schritte */}
         <Card className="p-6 bg-white border-slate-200">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Zubereitungsschritte</h2>
-          
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">
+            Zubereitungsschritte
+          </h2>
+
           <div className="space-y-3">
             {steps.map((step, index) => (
               <div key={index} className="flex gap-2">
                 <div className="flex-1">
-                  <Label htmlFor={`step-${index}`} className="text-slate-900">Schritt {index + 1}</Label>
+                  <Label htmlFor={`step-${index}`} className="text-slate-900">
+                    Schritt {index + 1}
+                  </Label>
                   <Textarea
                     id={`step-${index}`}
                     value={step}
@@ -280,10 +304,14 @@ export default function NewRecipe() {
 
         {/* Nährwerte */}
         <Card className="p-6 bg-white border-slate-200">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Nährwerte (optional)</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">
+            Nährwerte (optional)
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <Label htmlFor="calories" className="text-slate-900">Kalorien (kcal)</Label>
+              <Label htmlFor="calories" className="text-slate-900">
+                Kalorien (kcal)
+              </Label>
               <Input
                 id="calories"
                 type="number"
@@ -293,7 +321,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="carbohydrates" className="text-slate-900">Kohlenhydrate (g)</Label>
+              <Label htmlFor="carbohydrates" className="text-slate-900">
+                Kohlenhydrate (g)
+              </Label>
               <Input
                 id="carbohydrates"
                 type="number"
@@ -303,7 +333,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="fat" className="text-slate-900">Fett (g)</Label>
+              <Label htmlFor="fat" className="text-slate-900">
+                Fett (g)
+              </Label>
               <Input
                 id="fat"
                 type="number"
@@ -313,7 +345,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="protein" className="text-slate-900">Protein (g)</Label>
+              <Label htmlFor="protein" className="text-slate-900">
+                Protein (g)
+              </Label>
               <Input
                 id="protein"
                 type="number"
@@ -323,7 +357,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="sodium" className="text-slate-900">Natrium (mg)</Label>
+              <Label htmlFor="sodium" className="text-slate-900">
+                Natrium (mg)
+              </Label>
               <Input
                 id="sodium"
                 type="number"
@@ -333,7 +369,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="sugar" className="text-slate-900">Zucker (g)</Label>
+              <Label htmlFor="sugar" className="text-slate-900">
+                Zucker (g)
+              </Label>
               <Input
                 id="sugar"
                 type="number"
@@ -343,7 +381,9 @@ export default function NewRecipe() {
               />
             </div>
             <div>
-              <Label htmlFor="energy" className="text-slate-900">Energie (kJ)</Label>
+              <Label htmlFor="energy" className="text-slate-900">
+                Energie (kJ)
+              </Label>
               <Input
                 id="energy"
                 type="number"
@@ -374,5 +414,5 @@ export default function NewRecipe() {
         </div>
       </form>
     </div>
-  )
+  );
 }
