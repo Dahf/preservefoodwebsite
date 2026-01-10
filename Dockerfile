@@ -7,8 +7,7 @@ WORKDIR /app
 FROM base AS deps
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY package.json package-lock.json ./
-# Verwende npm install für mehr Flexibilität
-RUN npm install --omit=dev
+RUN npm ci
 
 FROM deps AS builder
 ENV NEXT_TELEMETRY_DISABLED=1
