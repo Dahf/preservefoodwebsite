@@ -17,6 +17,19 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
+
+    # SECURITY HARDENING
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    tmpfs:
+      - /tmp:noexec,nosuid,size=64M
+      - /app/.next/cache:noexec,nosuid,size=128M
+
     labels:
       - traefik.enable=true
       - traefik.http.routers.website.entrypoints=web,websecure
@@ -24,15 +37,25 @@ services:
       - traefik.http.routers.website.rule=Host(`silasbeckmann.de`)
       - traefik.http.routers.website.tls=true
       - traefik.docker.network=traefik_proxy-net
-      - traefik.http.middlewares.website.headers.SSLRedirect=true
-      - traefik.http.middlewares.website.headers.STSSeconds=315360000
-      - traefik.http.middlewares.website.headers.browserXSSFilter=true
-      - traefik.http.middlewares.website.headers.contentTypeNosniff=true
-      - traefik.http.middlewares.website.headers.forceSTSHeader=true
-      - traefik.http.middlewares.website.headers.SSLHost=${DOMAIN_NAME:-silasbeckmann.de}
-      - traefik.http.middlewares.website.headers.STSIncludeSubdomains=true
-      - traefik.http.middlewares.website.headers.STSPreload=true
-      - traefik.http.routers.website.middlewares=website@docker
+
+      # SECURITY HEADERS
+      - traefik.http.middlewares.website-security.headers.SSLRedirect=true
+      - traefik.http.middlewares.website-security.headers.STSSeconds=315360000
+      - traefik.http.middlewares.website-security.headers.browserXSSFilter=true
+      - traefik.http.middlewares.website-security.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.website-security.headers.forceSTSHeader=true
+      - traefik.http.middlewares.website-security.headers.SSLHost=${DOMAIN_NAME:-silasbeckmann.de}
+      - traefik.http.middlewares.website-security.headers.STSIncludeSubdomains=true
+      - traefik.http.middlewares.website-security.headers.STSPreload=true
+      - traefik.http.middlewares.website-security.headers.frameDeny=true
+      - traefik.http.middlewares.website-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
+
+      # RATE LIMITING
+      - traefik.http.middlewares.website-ratelimit.ratelimit.average=100
+      - traefik.http.middlewares.website-ratelimit.ratelimit.burst=50
+
+      - traefik.http.routers.website.middlewares=website-security@docker,website-ratelimit@docker
+
     networks:
       - traefik_proxy-net
 
