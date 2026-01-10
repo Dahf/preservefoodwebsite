@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 type Ingredient = {
   id: number;
   name: string;
+  ai_keywords?: string[] | null;
 };
 
 type SelectedIngredient = {
@@ -40,10 +41,11 @@ export default function IngredientSelector({
     }
 
     const searchIngredients = async () => {
+      // Search in both name and ai_keywords
       const { data, error } = await supabase
         .from("ingredients")
-        .select("id, name")
-        .ilike("name", `%${searchTerm}%`)
+        .select("id, name, ai_keywords")
+        .or(`name.ilike.%${searchTerm}%,ai_keywords.cs.{${searchTerm}}`)
         .limit(10);
 
       if (data) {
@@ -56,7 +58,7 @@ export default function IngredientSelector({
   }, [searchTerm]);
 
   const addIngredient = (ingredient: Ingredient) => {
-    // Prüfe ob bereits hinzugefügt
+    // Check if already added
     if (selectedIngredients.some((i) => i.ingredientid === ingredient.id)) {
       return;
     }
@@ -81,7 +83,7 @@ export default function IngredientSelector({
     setCreating(true);
 
     try {
-      // Erstelle neue Zutat
+      // Create new ingredient
       const { data, error } = await supabase
         .from("ingredients")
         .insert({ name: searchTerm.trim() })
@@ -95,7 +97,7 @@ export default function IngredientSelector({
       }
 
       if (data) {
-        // Füge die neue Zutat hinzu
+        // Add the new ingredient
         addIngredient(data);
       }
     } catch (err) {
@@ -132,7 +134,7 @@ export default function IngredientSelector({
             }}
             onFocus={() => setShowResults(true)}
             className="flex-1 bg-white border-slate-300 text-slate-900"
-            placeholder="Zutat eingeben..."
+            placeholder="z.B. Tomaten, Kirschtomaten..."
           />
           <Button
             type="button"
@@ -151,9 +153,15 @@ export default function IngredientSelector({
                 key={ingredient.id}
                 type="button"
                 onClick={() => addIngredient(ingredient)}
-                className="w-full px-4 py-2 text-left text-slate-900 hover:bg-slate-100 transition"
+                className="w-full text-left px-4 py-2 text-slate-900 hover:bg-slate-100 transition"
               >
-                {ingredient.name}
+                <div className="font-medium">{ingredient.name}</div>
+                {ingredient.ai_keywords &&
+                  ingredient.ai_keywords.length > 0 && (
+                    <div className="text-xs text-slate-500 mt-1">
+                      Keywords: {ingredient.ai_keywords.join(", ")}
+                    </div>
+                  )}
               </button>
             ))}
           </div>

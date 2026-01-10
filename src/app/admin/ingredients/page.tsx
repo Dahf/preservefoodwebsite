@@ -5,23 +5,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { createIngredient, getAllIngredients } from "../actions";
+import { createClient } from "@/lib/supabase/client";
+
+type Ingredient = {
+  id: number;
+  name: string;
+  ai_keywords: string[] | null;
+  created_at: string;
+};
 
 export default function IngredientsPage() {
-  const [ingredients, setIngredients] = useState<any[]>([]);
+  const supabase = createClient();
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [newIngredientName, setNewIngredientName] = useState("");
+  const [newKeywords, setNewKeywords] = useState("");
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState("");
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editKeywords, setEditKeywords] = useState("");
 
   useEffect(() => {
     loadIngredients();
   }, []);
 
   const loadIngredients = async () => {
-    const result = await getAllIngredients();
-    if (result.success) {
-      setIngredients(result.data);
+    const { data, error } = await supabase
+      .from("ingredients")
+      .select("*")
+      .order("name", { ascending: true });
+
+    if (data) {
+      setIngredients(data);
     }
     setLoading(false);
   };
@@ -31,16 +46,47 @@ export default function IngredientsPage() {
     setAdding(true);
     setError("");
 
-    const result = await createIngredient(newIngredientName);
+    try {
+      const keywordsArray = newKeywords
+        .split(",")
+        .map((k) => k.trim())
+        .filter((k) => k.length > 0);
 
-    if (result.success) {
-      setNewIngredientName("");
-      await loadIngredients();
-    } else {
-      setError(result.error || "Fehler beim Hinzufügen der Zutat");
+      const { error: insertError } = await supabase.from("ingredients").insert({
+        name: newIngredientName,
+        ai_keywords: keywordsArray.length > 0 ? keywordsArray : null,
+      });
+
+      if (insertError) {
+        setError(insertError.message);
+      } else {
+        setNewIngredientName("");
+        setNewKeywords("");
+        await loadIngredients();
+      }
+    } catch (err) {
+      setError("Fehler beim Hinzufügen der Zutat");
+    } finally {
+      setAdding(false);
     }
+  };
 
-    setAdding(false);
+  const handleUpdateKeywords = async (id: number) => {
+    const keywordsArray = editKeywords
+      .split(",")
+      .map((k) => k.trim())
+      .filter((k) => k.length > 0);
+
+    const { error } = await supabase
+      .from("ingredients")
+      .update({ ai_keywords: keywordsArray.length > 0 ? keywordsArray : null })
+      .eq("id", id);
+
+    if (!error) {
+      setEditingId(null);
+      setEditKeywords("");
+      await loadIngredients();
+    }
   };
 
   return (
@@ -50,7 +96,8 @@ export default function IngredientsPage() {
           Zutaten verwalten
         </h1>
         <p className="text-slate-600">
-          Füge neue Zutaten hinzu oder verwalte bestehende
+          Füge neue Zutaten hinzu und verwalte AI-Keywords für bessere
+          Suchfunktion
         </p>
       </div>
 
@@ -64,10 +111,10 @@ export default function IngredientsPage() {
         <h2 className="text-xl font-bold text-slate-900 mb-4">
           Neue Zutat hinzufügen
         </h2>
-        <form onSubmit={handleAddIngredient} className="flex gap-4">
-          <div className="flex-1">
+        <form onSubmit={handleAddIngredient} className="space-y-4">
+          <div>
             <Label htmlFor="ingredient-name" className="text-slate-900">
-              Zutat Name
+              Zutat Name *
             </Label>
             <Input
               id="ingredient-name"
@@ -78,10 +125,26 @@ export default function IngredientsPage() {
               className="mt-1 bg-white border-slate-300 text-slate-900"
             />
           </div>
+          <div>
+            <Label htmlFor="keywords" className="text-slate-900">
+              AI Keywords (kommagetrennt)
+            </Label>
+            <Input
+              id="keywords"
+              value={newKeywords}
+              onChange={(e) => setNewKeywords(e.target.value)}
+              placeholder="z.B. cherry tomatoes, roma tomatoes, plum tomatoes"
+              className="mt-1 bg-white border-slate-300 text-slate-900"
+            />
+            <p className="text-xs text-slate-500 mt-1">
+              Diese Keywords helfen bei der Suche. Z.B. wenn jemand "cherry
+              tomatoes" sucht, werden "Tomaten" gefunden.
+            </p>
+          </div>
           <Button
             type="submit"
             disabled={adding}
-            className="mt-7 bg-slate-900 text-white hover:bg-slate-800"
+            className="bg-slate-900 text-white hover:bg-slate-800"
           >
             {adding ? "Wird hinzugefügt..." : "Hinzufügen"}
           </Button>
@@ -96,23 +159,91 @@ export default function IngredientsPage() {
         {loading ? (
           <p className="text-slate-600">Wird geladen...</p>
         ) : ingredients.length > 0 ? (
-          <div className="grid gap-2 max-h-[600px] overflow-y-auto">
+          <div className="space-y-2 max-h-[600px] overflow-y-auto">
             {ingredients.map((ingredient) => (
               <div
                 key={ingredient.id}
-                className="flex items-center justify-between p-3 bg-slate-50 rounded hover:bg-slate-100 transition-colors border border-slate-200"
+                className="p-4 bg-slate-50 rounded border border-slate-200"
               >
-                <div>
-                  <span className="font-medium text-slate-900">
-                    {ingredient.name}
-                  </span>
-                  <span className="text-sm text-slate-500 ml-2">
-                    ID: {ingredient.id}
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <span className="font-medium text-slate-900">
+                      {ingredient.name}
+                    </span>
+                    <span className="text-sm text-slate-500 ml-2">
+                      ID: {ingredient.id}
+                    </span>
+                  </div>
+                  <span className="text-xs text-slate-500">
+                    {new Date(ingredient.created_at).toLocaleDateString(
+                      "de-DE"
+                    )}
                   </span>
                 </div>
-                <span className="text-xs text-slate-500">
-                  {new Date(ingredient.created_at).toLocaleDateString("de-DE")}
-                </span>
+
+                {editingId === ingredient.id ? (
+                  <div className="mt-2 flex gap-2">
+                    <Input
+                      value={editKeywords}
+                      onChange={(e) => setEditKeywords(e.target.value)}
+                      placeholder="keyword1, keyword2, keyword3"
+                      className="flex-1 bg-white border-slate-300 text-slate-900 text-sm"
+                    />
+                    <Button
+                      onClick={() => handleUpdateKeywords(ingredient.id)}
+                      size="sm"
+                      className="bg-green-600 hover:bg-green-700"
+                    >
+                      Speichern
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setEditingId(null);
+                        setEditKeywords("");
+                      }}
+                      size="sm"
+                      variant="outline"
+                      className="border-slate-300"
+                    >
+                      Abbrechen
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="mt-2 flex items-center justify-between">
+                    <div>
+                      {ingredient.ai_keywords &&
+                      ingredient.ai_keywords.length > 0 ? (
+                        <div className="flex gap-1 flex-wrap">
+                          {ingredient.ai_keywords.map((keyword, idx) => (
+                            <span
+                              key={idx}
+                              className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded"
+                            >
+                              {keyword}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-xs text-slate-400">
+                          Keine Keywords
+                        </span>
+                      )}
+                    </div>
+                    <Button
+                      onClick={() => {
+                        setEditingId(ingredient.id);
+                        setEditKeywords(
+                          ingredient.ai_keywords?.join(", ") || ""
+                        );
+                      }}
+                      size="sm"
+                      variant="outline"
+                      className="border-slate-300 text-slate-600"
+                    >
+                      Keywords bearbeiten
+                    </Button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
