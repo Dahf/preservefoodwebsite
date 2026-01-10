@@ -17,19 +17,6 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
-
-    # SECURITY HARDENING
-    read_only: true
-    security_opt:
-      - no-new-privileges:true
-    cap_drop:
-      - ALL
-    cap_add:
-      - NET_BIND_SERVICE
-    tmpfs:
-      - /tmp:noexec,nosuid,size=64M
-      - /app/.next/cache:noexec,nosuid,size=128M
-
     labels:
       - traefik.enable=true
       - traefik.http.routers.website.entrypoints=web,websecure
