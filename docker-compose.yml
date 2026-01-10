@@ -24,21 +24,15 @@ services:
       - traefik.http.routers.website.rule=Host(`silasbeckmann.de`)
       - traefik.http.routers.website.tls=true
       - traefik.docker.network=traefik_proxy-net
-      - traefik.http.middlewares.website-security.headers.SSLRedirect=true
-      - traefik.http.middlewares.website-security.headers.STSSeconds=315360000
-      - traefik.http.middlewares.website-security.headers.browserXSSFilter=true
-      - traefik.http.middlewares.website-security.headers.contentTypeNosniff=true
-      - traefik.http.middlewares.website-security.headers.forceSTSHeader=true
-      - traefik.http.middlewares.website-security.headers.SSLHost=${DOMAIN_NAME:-silasbeckmann.de}
-      - traefik.http.middlewares.website-security.headers.STSIncludeSubdomains=true
-      - traefik.http.middlewares.website-security.headers.STSPreload=true
-      - traefik.http.middlewares.website-security.headers.frameDeny=true
-      # RATE LIMITING
-      - traefik.http.middlewares.website-ratelimit.ratelimit.average=100
-      - traefik.http.middlewares.website-ratelimit.ratelimit.burst=50
-
-      - traefik.http.routers.website.middlewares=website-security@docker,website-ratelimit@docker
-
+      - traefik.http.middlewares.website.headers.SSLRedirect=true
+      - traefik.http.middlewares.website.headers.STSSeconds=315360000
+      - traefik.http.middlewares.website.headers.browserXSSFilter=true
+      - traefik.http.middlewares.website.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.website.headers.forceSTSHeader=true
+      - traefik.http.middlewares.website.headers.SSLHost=${DOMAIN_NAME:-silasbeckmann.de}
+      - traefik.http.middlewares.website.headers.STSIncludeSubdomains=true
+      - traefik.http.middlewares.website.headers.STSPreload=true
+      - traefik.http.routers.website.middlewares=website@docker
     networks:
       - traefik_proxy-net
 
