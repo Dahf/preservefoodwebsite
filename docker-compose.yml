@@ -24,8 +24,6 @@ services:
       - traefik.http.routers.website.rule=Host(`silasbeckmann.de`)
       - traefik.http.routers.website.tls=true
       - traefik.docker.network=traefik_proxy-net
-
-      # SECURITY HEADERS
       - traefik.http.middlewares.website-security.headers.SSLRedirect=true
       - traefik.http.middlewares.website-security.headers.STSSeconds=315360000
       - traefik.http.middlewares.website-security.headers.browserXSSFilter=true
@@ -35,8 +33,6 @@ services:
       - traefik.http.middlewares.website-security.headers.STSIncludeSubdomains=true
       - traefik.http.middlewares.website-security.headers.STSPreload=true
       - traefik.http.middlewares.website-security.headers.frameDeny=true
-      - traefik.http.middlewares.website-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
-
       # RATE LIMITING
       - traefik.http.middlewares.website-ratelimit.ratelimit.average=100
       - traefik.http.middlewares.website-ratelimit.ratelimit.burst=50
