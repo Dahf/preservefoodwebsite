@@ -1,98 +1,105 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card } from "@/components/ui/card"
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 
 export default function LoginForm() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
-  const [error, setError] = useState("")
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleEmailLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const supabase = createClient()
-      
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
+      const supabase = createClient();
+
+      const { data, error: signInError } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
       if (signInError) {
-        setError(signInError.message)
-        setLoading(false)
-        return
+        setError(signInError.message);
+        setLoading(false);
+        return;
       }
 
       // Prüfe ob Email in Admin-Liste ist
-      const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(',').map(e => e.trim()) || []
-      
+      const adminEmails =
+        process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(",").map((e) => e.trim()) ||
+        [];
+
       if (!data.user?.email || !adminEmails.includes(data.user.email)) {
-        await supabase.auth.signOut()
-        setError("Du hast keine Admin-Berechtigung")
-        setLoading(false)
-        return
+        await supabase.auth.signOut();
+        setError("Du hast keine Admin-Berechtigung");
+        setLoading(false);
+        return;
       }
 
       // Erfolgreich eingeloggt
-      router.push("/admin/dashboard")
-      router.refresh()
+      router.push("/admin/dashboard");
+      router.refresh();
     } catch (err) {
-      setError("Ein Fehler ist aufgetreten")
-      setLoading(false)
+      setError("Ein Fehler ist aufgetreten");
+      console.log(err);
+      setLoading(false);
     }
-  }
+  };
 
   const handleGoogleLogin = async () => {
-    setGoogleLoading(true)
-    setError("")
+    setGoogleLoading(true);
+    setError("");
 
     try {
-      const supabase = createClient()
-      
+      const supabase = createClient();
+
       // Verwende die korrekte Production URL
-      const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL 
+      const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL
         ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-        : `${window.location.origin}/auth/callback`
+        : `${window.location.origin}/auth/callback`;
 
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
         options: {
           redirectTo: redirectUrl,
         },
-      })
+      });
 
       if (error) {
-        setError(error.message)
-        setGoogleLoading(false)
+        setError(error.message);
+        setGoogleLoading(false);
       }
     } catch (err) {
-      setError("Ein Fehler ist aufgetreten")
-      setGoogleLoading(false)
+      setError("Ein Fehler ist aufgetreten");
+      console.log(err);
+      setGoogleLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black p-4">
       <Card className="w-full max-w-md p-8 bg-neutral-900 border-neutral-800">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
-          <p className="text-neutral-400">Melde dich mit deinen Zugangsdaten an</p>
+          <p className="text-neutral-400">
+            Melde dich mit deinen Zugangsdaten an
+          </p>
         </div>
 
-        {searchParams.get('error') === 'unauthorized' && (
+        {searchParams.get("error") === "unauthorized" && (
           <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-500 text-sm">
             Keine Admin-Berechtigung
           </div>
@@ -152,7 +159,9 @@ export default function LoginForm() {
         {/* Email/Password Login */}
         <form onSubmit={handleEmailLogin} className="space-y-4">
           <div>
-            <Label htmlFor="email" className="text-white">E-Mail</Label>
+            <Label htmlFor="email" className="text-white">
+              E-Mail
+            </Label>
             <Input
               id="email"
               type="email"
@@ -166,7 +175,9 @@ export default function LoginForm() {
           </div>
 
           <div>
-            <Label htmlFor="password" className="text-white">Passwort</Label>
+            <Label htmlFor="password" className="text-white">
+              Passwort
+            </Label>
             <Input
               id="password"
               type="password"
@@ -189,5 +200,5 @@ export default function LoginForm() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
