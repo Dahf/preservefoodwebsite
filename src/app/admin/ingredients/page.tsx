@@ -27,6 +27,7 @@ export default function IngredientsPage() {
 
   useEffect(() => {
     loadIngredients();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadIngredients = async () => {
@@ -137,8 +138,8 @@ export default function IngredientsPage() {
               className="mt-1 bg-white border-slate-300 text-slate-900"
             />
             <p className="text-xs text-slate-500 mt-1">
-              Diese Keywords helfen bei der Suche. Z.B. wenn jemand "cherry
-              tomatoes" sucht, werden "Tomaten" gefunden.
+              Diese Keywords helfen bei der Suche. Z.B. wenn jemand &quot;cherry
+              tomatoes&quot; sucht, werden &quot;Tomaten&quot; gefunden.
             </p>
           </div>
           <Button

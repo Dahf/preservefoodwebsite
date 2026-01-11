@@ -99,8 +99,7 @@ export default function HomeContent() {
               Fokus auf das Wesentliche
             </h3>
             <p className="text-slate-600">
-              Keine Rezepte. Keine Social-Features. Nur das, was wirklich
-              zählt.
+              Keine Rezepte. Keine Social-Features. Nur das, was wirklich zählt.
             </p>
           </div>
 
@@ -188,7 +187,7 @@ export default function HomeContent() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              So einfach geht's
+              So einfach geht&apos;s
             </h2>
             <p className="text-slate-600">
               Drei Schritte zu weniger Lebensmittelverschwendung
@@ -251,28 +250,18 @@ export default function HomeContent() {
             </div>
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-green-600 mb-2">
-                  0
-                </div>
-                <div className="text-slate-600">
-                  Rezepte aufgezwungen
-                </div>
+                <div className="text-4xl font-bold text-green-600 mb-2">0</div>
+                <div className="text-slate-600">Rezepte aufgezwungen</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-green-600 mb-2">
                   100%
                 </div>
-                <div className="text-slate-600">
-                  Fokus auf Wesentliches
-                </div>
+                <div className="text-slate-600">Fokus auf Wesentliches</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-green-600 mb-2">
-                  ∞
-                </div>
-                <div className="text-slate-600">
-                  Gerettete Lebensmittel
-                </div>
+                <div className="text-4xl font-bold text-green-600 mb-2">∞</div>
+                <div className="text-slate-600">Gerettete Lebensmittel</div>
               </div>
             </div>
           </Card>
@@ -366,9 +355,7 @@ export default function HomeContent() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded"></div>
-              <span className="font-semibold text-slate-900">
-                PreserveFood
-              </span>
+              <span className="font-semibold text-slate-900">PreserveFood</span>
             </div>
             <p className="text-sm text-slate-600">
               © 2026 PreserveFood. Schluss mit Verschwendung.

@@ -55,7 +55,7 @@ export default function IngredientSelector({
 
     const debounce = setTimeout(searchIngredients, 300);
     return () => clearTimeout(debounce);
-  }, [searchTerm]);
+  }, [searchTerm, supabase]);
 
   const addIngredient = (ingredient: Ingredient) => {
     // Check if already added
