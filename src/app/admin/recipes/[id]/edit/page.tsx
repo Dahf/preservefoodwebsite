@@ -143,7 +143,8 @@ export default function EditRecipe({ params }: { params: Promise<{ id: string }>
     }
   };
 
-  const hmealId) return;
+  const handleDelete = async () => {
+    if (!mealId) return;
     if (!confirm("Möchtest du dieses Rezept wirklich löschen?")) {
       return;
     }
@@ -152,8 +153,7 @@ export default function EditRecipe({ params }: { params: Promise<{ id: string }>
     setError("");
 
     try {
-      const result = await deleteMeal(mealId
-      const result = await deleteMeal(parseInt(params.id));
+      const result = await deleteMeal(mealId);
 
       if (result.success) {
         router.push("/admin/recipes");
