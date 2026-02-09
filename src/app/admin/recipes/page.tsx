@@ -3,21 +3,20 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export default async function AdminDashboard() {
+export default async function RecipesPage() {
   const supabase = await createClient();
 
   const { data: meals, error } = await supabase
     .from("meals")
     .select("*")
-    .order("id", { ascending: false })
-    .limit(20);
+    .order("name", { ascending: true });
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Dashboard</h1>
-          <p className="text-slate-600">Verwalte deine Rezepte und Zutaten</p>
+          <h1 className="text-4xl font-bold text-slate-900 mb-2">Alle Rezepte</h1>
+          <p className="text-slate-600">Verwalte und bearbeite deine Rezepte</p>
         </div>
         <Link href="/admin/recipes/new">
           <Button className="bg-slate-900 text-white hover:bg-slate-800">
@@ -56,7 +55,7 @@ export default async function AdminDashboard() {
               <p className="text-slate-600 text-sm mb-4 line-clamp-2">
                 {meal.description}
               </p>
-              <div className="flex gap-2 flex-wrap text-xs">
+              <div className="flex gap-2 flex-wrap text-xs mb-4">
                 <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded">
                   {meal.category}
                 </span>
@@ -71,16 +70,14 @@ export default async function AdminDashboard() {
                   </span>
                 )}
               </div>
-              <div className="mt-4">
-                <Link href={`/admin/recipes/${meal.id}/edit`}>
-                  <Button 
-                    className="w-full bg-slate-900 text-white hover:bg-slate-800"
-                    size="sm"
-                  >
-                    Bearbeiten
-                  </Button>
-                </Link>
-              </div>
+              <Link href={`/admin/recipes/${meal.id}/edit`}>
+                <Button 
+                  className="w-full bg-slate-900 text-white hover:bg-slate-800"
+                  size="sm"
+                >
+                  Bearbeiten
+                </Button>
+              </Link>
             </Card>
           ))}
         </div>

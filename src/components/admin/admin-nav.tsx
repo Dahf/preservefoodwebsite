@@ -31,6 +31,12 @@ export default function AdminNav({ userEmail }: { userEmail: string }) {
                 Dashboard
               </Link>
               <Link
+                href="/admin/recipes"
+                className="text-neutral-300 hover:text-white transition"
+              >
+                Rezepte
+              </Link>
+              <Link
                 href="/admin/recipes/new"
                 className="text-neutral-300 hover:text-white transition"
               >

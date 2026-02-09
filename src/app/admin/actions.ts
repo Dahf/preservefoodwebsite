@@ -133,3 +133,140 @@ export async function getAllIngredients() {
 
   return { success: true, data: data || [] }
 }
+
+export async function getMealById(id: number) {
+  const supabase = await createClient()
+
+  const { data: meal, error: mealError } = await supabase
+    .from("meals")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (mealError) {
+    return { success: false, error: mealError.message }
+  }
+
+  // Hole die Zutaten
+  const { data: ingredients, error: ingredientsError } = await supabase
+    .from("meal_ingredient")
+    .select(`
+      ingredientid,
+      quantity,
+      unit,
+      ingredients (
+        id,
+        name
+      )
+    `)
+    .eq("mealid", id)
+
+  if (ingredientsError) {
+    return { success: false, error: ingredientsError.message }
+  }
+
+  return { 
+    success: true, 
+    data: {
+      ...meal,
+      ingredients: ingredients?.map((ing: any) => ({
+        ingredientid: ing.ingredientid,
+        name: ing.ingredients?.name || "",
+        quantity: ing.quantity,
+        unit: ing.unit,
+      })) || []
+    }
+  }
+}
+
+export async function updateMeal(id: number, input: CreateMealInput) {
+  const supabase = await createClient()
+
+  try {
+    // Aktualisiere das Rezept
+    const { data: meal, error: mealError } = await supabase
+      .from("meals")
+      .update({
+        name: input.name,
+        description: input.description,
+        category: input.category,
+        difficulty: input.difficulty,
+        time: input.time,
+        servingsize: input.servingsize,
+        image: input.image,
+        steps: input.steps,
+        type: input.type,
+        calories: input.calories,
+        carbohydrates: input.carbohydrates,
+        fat: input.fat,
+        protein: input.protein,
+        sodium: input.sodium,
+        sugar: input.sugar,
+        energy: input.energy,
+      })
+      .eq("id", id)
+      .select()
+      .single()
+
+    if (mealError) {
+      return { success: false, error: mealError.message }
+    }
+
+    // Lösche alte Zutaten-Verknüpfungen
+    await supabase
+      .from("meal_ingredient")
+      .delete()
+      .eq("mealid", id)
+
+    // Füge neue Zutaten-Verknüpfungen hinzu
+    if (input.ingredients.length > 0) {
+      const mealIngredients = input.ingredients.map((ing) => ({
+        mealid: id,
+        ingredientid: ing.ingredientid,
+        quantity: ing.quantity,
+        unit: ing.unit,
+      }))
+
+      const { error: ingredientsError } = await supabase
+        .from("meal_ingredient")
+        .insert(mealIngredients)
+
+      if (ingredientsError) {
+        return { success: false, error: ingredientsError.message }
+      }
+    }
+
+    revalidatePath("/admin/dashboard")
+    revalidatePath(`/admin/recipes/${id}/edit`)
+    return { success: true, data: meal }
+  } catch (error) {
+    return { success: false, error: "Ein unerwarteter Fehler ist aufgetreten" }
+  }
+}
+
+export async function deleteMeal(id: number) {
+  const supabase = await createClient()
+
+  try {
+    // Lösche zuerst die Zutaten-Verknüpfungen
+    await supabase
+      .from("meal_ingredient")
+      .delete()
+      .eq("mealid", id)
+
+    // Lösche das Rezept
+    const { error } = await supabase
+      .from("meals")
+      .delete()
+      .eq("id", id)
+
+    if (error) {
+      return { success: false, error: error.message }
+    }
+
+    revalidatePath("/admin/dashboard")
+    return { success: true }
+  } catch (error) {
+    return { success: false, error: "Ein unerwarteter Fehler ist aufgetreten" }
+  }
+}
