@@ -18,12 +18,13 @@ type IngredientInput = {
   unit: string;
 };
 
-export default function EditRecipe({ params }: { params: { id: string } }) {
+export default function EditRecipe({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
+  const [mealId, setMealId] = useState<number | null>(null);
 
   // Basisdaten
   const [name, setName] = useState("");
@@ -52,7 +53,10 @@ export default function EditRecipe({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const loadMeal = async () => {
-      const result = await getMealById(parseInt(params.id));
+      const resolvedParams = await params;
+      const id = parseInt(resolvedParams.id);
+      setMealId(id);
+      const result = await getMealById(id);
 
       if (result.success && result.data) {
         const meal = result.data;
@@ -81,7 +85,7 @@ export default function EditRecipe({ params }: { params: { id: string } }) {
     };
 
     loadMeal();
-  }, [params.id]);
+  }, [params]);
 
   const addStep = () => {
     setSteps([...steps, ""]);
@@ -97,11 +101,12 @@ export default function EditRecipe({ params }: { params: { id: string } }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!mealId) return;
     setSaving(true);
     setError("");
 
     try {
-      const result = await updateMeal(parseInt(params.id), {
+      const result = await updateMeal(mealId, {
         name,
         description,
         category,
@@ -138,7 +143,7 @@ export default function EditRecipe({ params }: { params: { id: string } }) {
     }
   };
 
-  const handleDelete = async () => {
+  const hmealId) return;
     if (!confirm("Möchtest du dieses Rezept wirklich löschen?")) {
       return;
     }
@@ -147,6 +152,7 @@ export default function EditRecipe({ params }: { params: { id: string } }) {
     setError("");
 
     try {
+      const result = await deleteMeal(mealId
       const result = await deleteMeal(parseInt(params.id));
 
       if (result.success) {
