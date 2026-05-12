@@ -44,7 +44,7 @@
       "intro": "The following providers process data on our behalf:",
       "supabase": "Supabase Inc. – database hosting and authentication (EU servers, data processing agreement in place).",
       "vercel": "Vercel Inc. / hosting provider – technical operation of the website.",
-      "ai": "AI providers based in the USA – specifically OpenAI, L.L.C. (OpenAI API), Anthropic, PBC (Claude API) and Perplexity AI, Inc. (Perplexity API). These providers process requests for the app's AI-powered features (e.g. recipe suggestions, automatic recognition, research). Only generic, anonymised queries are sent to the AI providers – no personal data and no free-text user input. Data processing agreements (DPAs) are in place with OpenAI and Anthropic; data transfer to the USA is based on the EU Standard Contractual Clauses (Art. 46(2)(c) GDPR). The providers have contractually agreed not to use submitted API content to train their models.",
+      "ai": "AI providers based in the USA – specifically OpenAI, L.L.C. (OpenAI API) and Perplexity AI, Inc. (Perplexity API). These providers process requests for the app's AI-powered features (e.g. recipe suggestions, automatic recognition, research). For most AI features, only generic, anonymised queries are sent (e.g. ingredient lists, quantities) – no personal data. The recipe chat feature is an exception: the message you type is forwarded unchanged to OpenAI, so please do not enter personal data (e.g. real names, addresses, health information) there. Data processing agreements (DPAs) are in place with OpenAI and Perplexity; data transfer to the USA is based on the EU Standard Contractual Clauses (Art. 46(2)(c) GDPR). The providers have contractually agreed not to use submitted API content to train their models.",
       "stores": "Apple App Store / Google Play Store – distribution of the mobile app; their privacy notices apply in addition."
     },
     "cookies": {
@@ -175,7 +175,7 @@
     },
     "thirdPartyContent": {
       "title": "7. Third-party content & AI features",
-      "body": "The app uses AI features powered by external providers (OpenAI, Anthropic / Claude, Perplexity). AI-generated content (e.g. recipe suggestions, texts) is created automatically and may be inaccurate, incomplete or misleading. It is not a substitute for nutritional, medical or other professional advice. You use AI results at your own risk and should independently verify them before making important decisions (e.g. regarding allergies, food intolerances or health-related topics).",
+      "body": "The app uses AI features powered by external providers (OpenAI, Perplexity). AI-generated content (e.g. recipe suggestions, texts) is created automatically and may be inaccurate, incomplete or misleading. It is not a substitute for nutritional, medical or other professional advice. You use AI results at your own risk and should independently verify them before making important decisions (e.g. regarding allergies, food intolerances or health-related topics).",
       "rights": "All third-party content displayed in the app is used with the respective necessary rights."
     },
     "availability": {
