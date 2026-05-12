@@ -360,12 +360,36 @@ export default function HomeContent() {
             <p className="text-sm text-slate-600">
               © 2026 PreserveFood. Schluss mit Verschwendung.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               <Link
-                href="/datenschutz"
+                href="/de/privacy"
                 className="text-sm text-slate-600 hover:text-slate-900"
               >
                 Datenschutz
+              </Link>
+              <Link
+                href="/de/imprint"
+                className="text-sm text-slate-600 hover:text-slate-900"
+              >
+                Impressum
+              </Link>
+              <Link
+                href="/de/terms"
+                className="text-sm text-slate-600 hover:text-slate-900"
+              >
+                Nutzungsbedingungen
+              </Link>
+              <Link
+                href="/de/delete"
+                className="text-sm text-slate-600 hover:text-slate-900"
+              >
+                Konto löschen
+              </Link>
+              <Link
+                href="/en/privacy"
+                className="text-sm text-slate-600 hover:text-slate-900"
+              >
+                EN
               </Link>
             </div>
           </div>

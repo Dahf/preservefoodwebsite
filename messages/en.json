@@ -1,0 +1,200 @@
+{
+  "common": {
+    "appName": "Preserve Food",
+    "supportEmail": "mail@preservefood.de",
+    "languageSwitcher": "Language",
+    "languageDe": "Deutsch",
+    "languageEn": "English",
+    "lastUpdated": "Last updated: {date}",
+    "back": "Back"
+  },
+  "nav": {
+    "privacy": "Privacy",
+    "delete": "Delete account",
+    "imprint": "Imprint",
+    "terms": "Terms of Use"
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "How the Preserve Food app handles your personal data.",
+    "kicker": "Privacy",
+    "title": "Privacy Policy",
+    "intro": "This policy explains which personal data we process in the Preserve Food app and on this website, the purposes of processing and the rights you can exercise at any time.",
+    "controller": {
+      "title": "Data Controller",
+      "body": "The data controller under the GDPR is:",
+      "contactPrefix": "Contact:"
+    },
+    "data": {
+      "title": "Data we process",
+      "intro": "We only process data that is necessary to operate the app and website:",
+      "account": "Account data (email address, hashed password) – processed via our auth provider Supabase to enable sign-in and sync.",
+      "content": "User content (saved groceries, recipes, meal plans, notes) – used solely to provide the app's features.",
+      "images": "Images & camera input – if you take or upload photos of food items. Data is stored encrypted in our database and not shared with third parties.",
+      "push": "Push tokens – if you enable notifications, we store an anonymous device token so we can send reminders (e.g. expiring food).",
+      "subscription": "Subscription status – we receive from Apple or Google only the information whether your account has an active premium subscription. Payment details (credit card, address, billing information) are processed exclusively by Apple/Google and are not transmitted to us.",
+      "logs": "Technical data – server logs (IP, timestamp, user agent) are kept briefly to protect the service from abuse and then deleted or anonymised."
+    },
+    "purposes": {
+      "title": "Purposes & legal bases",
+      "body": "Processing is based on Art. 6(1)(b) GDPR (performance of a contract / provision of app features), Art. 6(1)(f) (legitimate interest in secure operation), and where applicable Art. 6(1)(a) (consent, e.g. push notifications) and Art. 6(1)(c) (legal obligations)."
+    },
+    "thirdParty": {
+      "title": "Processors & services",
+      "intro": "The following providers process data on our behalf:",
+      "supabase": "Supabase Inc. – database hosting and authentication (EU servers, data processing agreement in place).",
+      "vercel": "Vercel Inc. / hosting provider – technical operation of the website.",
+      "stores": "Apple App Store / Google Play Store – distribution of the mobile app; their privacy notices apply in addition."
+    },
+    "cookies": {
+      "title": "Cookies & local storage",
+      "intro": "On the website we only use what is strictly necessary:",
+      "essential": "Essential cookies/tokens for sign-in and session management (e.g. Supabase auth cookie). These are required for authenticated areas to work.",
+      "preferences": "Local storage (localStorage) for your theme preference (light/dark).",
+      "noTracking": "We do not use analytics, tracking or advertising cookies and do not embed any ad networks.",
+      "control": "You can clear or block cookies in your browser at any time. Blocking essential cookies will prevent sign-in from working."
+    },
+    "retention": {
+      "title": "Retention",
+      "body": "We keep personal data only as long as needed for the purposes above. Account and content data are deleted on your request or at the latest after 12 months of inactivity. Log data is automatically deleted or anonymised after 14 days at the latest."
+    },
+    "rights": {
+      "title": "Your rights",
+      "body": "You have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), data portability (Art. 20) and objection (Art. 21) at any time. Where processing is based on consent, you can withdraw it at any time.",
+      "complaint": "You also have the right to lodge a complaint with your supervisory authority (in Hesse: Der Hessische Beauftragte für Datenschutz und Informationsfreiheit)."
+    },
+    "deletion": {
+      "title": "Account deletion",
+      "body": "You can request deletion of your account and all related data at any time. See our dedicated „Delete account“ page for instructions."
+    },
+    "contact": {
+      "title": "Contact",
+      "body": "For privacy questions or to exercise your rights, write to <email></email>. We usually reply within a few days."
+    }
+  },
+  "delete": {
+    "metaTitle": "Delete account",
+    "metaDescription": "Request deletion of your Preserve Food account and all associated data.",
+    "kicker": "Delete account",
+    "title": "Request deletion of your account",
+    "intro": "You can request removal of your Preserve Food account and all stored personal data at any time.",
+    "steps": {
+      "title": "How it works",
+      "step1": "Click „Request deletion“ below.",
+      "step2": "Enter the email address of your account and any optional details.",
+      "step3": "Send the request – we confirm deletion within 7 working days by email."
+    },
+    "scope": {
+      "title": "What we delete",
+      "intro": "When you delete your account we permanently remove:",
+      "item1": "Your account data (email address, hashed password, profile).",
+      "item2": "All content you have stored (groceries, recipes, meal plans, notes, images).",
+      "item3": "Your push token, so no further notifications will be sent.",
+      "retentionNote": "Records we are legally required to keep (e.g. invoices for paid features) are retained for the statutory period only and not actively used."
+    },
+    "subjectPrefix": "Account deletion request",
+    "bodyText": "Please delete my account and all associated data.\n\nMy account email: \n(Optional) Additional info: ",
+    "buttonRequest": "Request deletion",
+    "altContact": "Alternatively just write to <email></email>.",
+    "responseTime": {
+      "title": "Response time",
+      "body": "We typically process deletion requests within 7 working days and confirm completion by email."
+    }
+  },
+  "imprint": {
+    "metaTitle": "Imprint",
+    "metaDescription": "Legal information per § 5 TMG.",
+    "kicker": "Imprint",
+    "title": "Imprint",
+    "tmg": {
+      "title": "Information per § 5 TMG"
+    },
+    "contact": {
+      "title": "Contact",
+      "emailLabel": "Email:"
+    },
+    "vat": {
+      "title": "VAT",
+      "body": "Under § 19 UStG (German small-business rule) no VAT is charged or disclosed."
+    },
+    "responsibility": {
+      "title": "Responsible for content",
+      "body": "Silas Beckmann, address as above."
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "content": "The content of these pages has been created with the greatest care. However, we cannot guarantee the accuracy, completeness or timeliness of the information.",
+      "links": "Our site may contain links to external third-party websites whose content we cannot influence. The respective provider or operator of those pages is always responsible for their content."
+    },
+    "dispute": {
+      "title": "Dispute resolution",
+      "body": "The European Commission provides a platform for online dispute resolution (ODR): https://ec.europa.eu/consumers/odr. We are not obliged or willing to participate in dispute resolution proceedings before a consumer arbitration board."
+    }
+  },
+  "terms": {
+    "metaTitle": "Terms of Use",
+    "metaDescription": "Terms of Use for the Preserve Food app and website.",
+    "kicker": "Terms of Use",
+    "title": "Terms of Use",
+    "intro": "These Terms of Use govern your use of the Preserve Food app and this website. By signing up or using the service you agree to these terms.",
+    "service": {
+      "title": "1. Service description",
+      "body": "Preserve Food is a mobile application for capturing, managing and planning groceries, recipes and meals. Features may change or be discontinued over time.",
+      "tiers": "The app is offered in a free basic version and a paid premium version („Preserve Food Pro“). Premium includes AI and scan features (e.g. barcode scanning, automatic recognition) as well as advanced meal planning."
+    },
+    "subscription": {
+      "title": "2. Subscriptions & payment",
+      "intro": "Preserve Food Pro is offered as a monthly subscription. All purchases are processed exclusively through the Apple App Store or Google Play Store.",
+      "merchant": "The contractual partner for the purchase of the subscription is Apple Inc. (App Store) or Google LLC (Google Play). Their respective terms of use and sale apply in addition.",
+      "pricing": "Currently valid prices are displayed in the app and in the respective store. Prices may change; changes will be communicated in the store before they take effect.",
+      "renewal": "Payment will be charged to your Apple ID or Google account upon confirmation of purchase. The subscription automatically renews for the same period unless cancelled at least 24 hours before the end of the current period. The renewal will be charged within 24 hours prior to the end of the current period at the cost of the selected subscription option.",
+      "manage": "Subscriptions can be managed and cancelled at any time in the settings of your Apple ID or Google account. Cancellation directly with us is technically not possible.",
+      "withdrawal": "With the completion of the purchase and the immediate provision of the digital content, the statutory right of withdrawal expires (§ 356(5) German Civil Code). Refund requests are processed exclusively by Apple or Google in accordance with their policies."
+    },
+    "account": {
+      "title": "3. Account",
+      "body": "Certain features require a free user account. You must provide accurate information and keep your password confidential. You are responsible for all activity under your account."
+    },
+    "age": {
+      "title": "4. Minimum age",
+      "body": "The service may be used by persons aged 16 and over. Younger users need the consent of a parent or legal guardian."
+    },
+    "userContent": {
+      "title": "5. User content",
+      "body": "You retain all rights to content you upload to the app (e.g. your own recipes, notes, photos). You grant us only the right to technically store and display this content to provide the app to you.",
+      "responsibility": "You are solely responsible for the content you upload. Uploading illegal, abusive or infringing content is prohibited."
+    },
+    "conduct": {
+      "title": "6. Acceptable use",
+      "intro": "When using the app you must not:",
+      "item1": "use the service in ways that violate applicable law;",
+      "item2": "disturb, overload or circumvent our technical infrastructure;",
+      "item3": "misuse other people's accounts or use third-party credentials;",
+      "item4": "run automated scripts (bots, scrapers) without our consent."
+    },
+    "availability": {
+      "title": "7. Availability",
+      "body": "We aim for high availability but do not guarantee uninterrupted service. Maintenance, technical issues or force majeure may cause temporary limitations."
+    },
+    "termination": {
+      "title": "8. Termination",
+      "body": "You can terminate your account at any time via the „Delete account“ page. We reserve the right to suspend or delete accounts in case of serious or repeated breaches of these terms."
+    },
+    "liability": {
+      "title": "9. Liability",
+      "body": "We are liable without limitation for intent and gross negligence and under the German Product Liability Act. For slight negligence we are only liable in case of breach of essential contractual duties and limited to typical, foreseeable damages. Any further liability is excluded."
+    },
+    "changes": {
+      "title": "10. Changes",
+      "body": "We may amend these Terms where legally, technically or organisationally necessary. We will inform you about material changes by email or in the app; changes take effect on the date stated in the notice."
+    },
+    "law": {
+      "title": "11. Governing law & jurisdiction",
+      "body": "These Terms are governed by the law of the Federal Republic of Germany, excluding the UN Convention on Contracts for the International Sale of Goods. For consumers this choice of law applies only insofar as mandatory consumer protection rules of their country of residence do not conflict."
+    },
+    "severability": {
+      "title": "12. Severability",
+      "body": "Should any provision of these Terms be or become invalid, the validity of the remaining provisions remains unaffected."
+    }
+  }
+}

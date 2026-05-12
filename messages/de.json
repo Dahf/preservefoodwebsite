@@ -1,0 +1,200 @@
+{
+  "common": {
+    "appName": "Preserve Food",
+    "supportEmail": "mail@preservefood.de",
+    "languageSwitcher": "Sprache",
+    "languageDe": "Deutsch",
+    "languageEn": "English",
+    "lastUpdated": "Stand: {date}",
+    "back": "Zurück"
+  },
+  "nav": {
+    "privacy": "Datenschutz",
+    "delete": "Konto löschen",
+    "imprint": "Impressum",
+    "terms": "Nutzungsbedingungen"
+  },
+  "privacy": {
+    "metaTitle": "Datenschutzerklärung",
+    "metaDescription": "Informationen zum Umgang mit personenbezogenen Daten in der Preserve Food App.",
+    "kicker": "Datenschutz",
+    "title": "Datenschutzerklärung",
+    "intro": "Diese Erklärung beschreibt, welche personenbezogenen Daten wir im Rahmen der Preserve Food App und dieser Website verarbeiten, zu welchen Zwecken das geschieht und welche Rechte du jederzeit ausüben kannst.",
+    "controller": {
+      "title": "Verantwortliche Stelle",
+      "body": "Verantwortlich im Sinne der DSGVO ist:",
+      "contactPrefix": "Kontakt:"
+    },
+    "data": {
+      "title": "Welche Daten wir verarbeiten",
+      "intro": "Wir verarbeiten ausschließlich Daten, die für den Betrieb der App und der Website notwendig sind:",
+      "account": "Account-Daten (E-Mail-Adresse, verschlüsseltes Passwort) – verarbeitet über unseren Auth-Anbieter Supabase, um dir Anmeldung und Synchronisation zu ermöglichen.",
+      "content": "Nutzerinhalte (gespeicherte Lebensmittel, Rezepte, Mahlzeitenpläne, Notizen) – ausschließlich zur Bereitstellung der App-Funktionen.",
+      "images": "Bilder & Kamera-Daten – falls du Fotos von Lebensmitteln aufnimmst oder hochlädst. Die Daten werden verschlüsselt in unserer Datenbank gespeichert und nicht an Dritte weitergegeben.",
+      "push": "Push-Token – wenn du Benachrichtigungen aktivierst, speichern wir einen anonymen Geräte-Token, um dir Erinnerungen (z.B. ablaufende Lebensmittel) senden zu können.",
+      "subscription": "Abo-Status – wir erhalten von Apple bzw. Google ausschließlich die Information, ob für deinen Account eine aktive Premium-Subscription besteht. Zahlungsdaten (Kreditkarte, Adresse, Rechnungsdetails) werden ausschließlich von Apple/Google verarbeitet und uns nicht übermittelt.",
+      "logs": "Technische Daten – Server-Logs (IP-Adresse, Zeitstempel, User-Agent) werden zum Schutz vor Missbrauch kurzzeitig gespeichert und danach gelöscht oder anonymisiert."
+    },
+    "purposes": {
+      "title": "Zwecke & Rechtsgrundlagen",
+      "body": "Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung bzw. Bereitstellung der App-Funktionen), lit. f (berechtigtes Interesse am sicheren Betrieb der Dienste) sowie ggf. lit. a (Einwilligung, z.B. bei Push-Benachrichtigungen) und lit. c (gesetzliche Pflichten)."
+    },
+    "thirdParty": {
+      "title": "Auftragsverarbeiter & Dienste",
+      "intro": "Folgende Dienstleister verarbeiten Daten in unserem Auftrag:",
+      "supabase": "Supabase Inc. – Hosting der Datenbank und Auth (Server in der EU, Auftragsverarbeitungsvertrag abgeschlossen).",
+      "vercel": "Vercel Inc. / Hosting-Provider – technischer Betrieb der Website.",
+      "stores": "Apple App Store / Google Play Store – Auslieferung der mobilen App; deren Datenschutzhinweise gelten zusätzlich."
+    },
+    "cookies": {
+      "title": "Cookies & lokale Speicherung",
+      "intro": "Wir verwenden auf der Website nur das, was technisch notwendig ist:",
+      "essential": "Essenzielle Cookies/Tokens für die Anmeldung und Sitzungsverwaltung (z.B. Supabase-Auth-Cookie). Diese sind erforderlich, damit eingeloggte Bereiche funktionieren.",
+      "preferences": "Lokale Speicherung (localStorage) für deine Theme-Einstellung (hell/dunkel).",
+      "noTracking": "Wir setzen keine Analyse-, Tracking- oder Werbe-Cookies ein und binden keine Werbenetzwerke ein.",
+      "control": "Du kannst Cookies in deinem Browser jederzeit löschen oder blockieren. Bei Blockade essenzieller Cookies funktioniert die Anmeldung nicht mehr."
+    },
+    "retention": {
+      "title": "Speicherdauer",
+      "body": "Wir speichern personenbezogene Daten nur so lange, wie es für die genannten Zwecke nötig ist. Account- und Inhaltsdaten löschen wir auf deine Anfrage hin oder spätestens 12 Monate nach Inaktivität. Log-Daten werden automatisch nach maximal 14 Tagen gelöscht oder anonymisiert."
+    },
+    "rights": {
+      "title": "Deine Rechte",
+      "body": "Du hast jederzeit das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21) gegen die Verarbeitung. Wenn du in eine Verarbeitung eingewilligt hast, kannst du diese Einwilligung jederzeit widerrufen.",
+      "complaint": "Du hast außerdem das Recht, dich bei der zuständigen Aufsichtsbehörde (in Hessen: Der Hessische Beauftragte für Datenschutz und Informationsfreiheit) zu beschweren."
+    },
+    "deletion": {
+      "title": "Kontolöschung",
+      "body": "Du kannst dein Konto und alle zugehörigen Daten jederzeit löschen lassen. Eine ausführliche Anleitung findest du auf der Seite „Konto löschen“."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "body": "Bei Fragen zum Datenschutz oder zur Ausübung deiner Rechte schreib uns an <email></email>. Wir antworten in der Regel innerhalb weniger Tage."
+    }
+  },
+  "delete": {
+    "metaTitle": "Konto löschen",
+    "metaDescription": "Fordere die Löschung deines Preserve-Food-Kontos und aller zugehörigen Daten an.",
+    "kicker": "Konto löschen",
+    "title": "Löschung deines Kontos anfordern",
+    "intro": "Du kannst die Entfernung deines Preserve-Food-Kontos und aller gespeicherten personenbezogenen Daten jederzeit beantragen.",
+    "steps": {
+      "title": "So funktioniert es",
+      "step1": "Klicke unten auf „Löschung anfragen“.",
+      "step2": "Trage die E-Mail-Adresse deines Accounts ein und (optional) weitere Hinweise.",
+      "step3": "Sende die Anfrage ab – wir bestätigen die Löschung innerhalb von 7 Werktagen per E-Mail."
+    },
+    "scope": {
+      "title": "Was gelöscht wird",
+      "intro": "Bei einer Kontolöschung entfernen wir vollständig:",
+      "item1": "Deine Account-Daten (E-Mail-Adresse, verschlüsseltes Passwort, Profil).",
+      "item2": "Alle von dir gespeicherten Inhalte (Lebensmittel, Rezepte, Mahlzeitenpläne, Notizen, Bilder).",
+      "item3": "Deinen Push-Token, sodass keine weiteren Benachrichtigungen versandt werden.",
+      "retentionNote": "Eventuell gesetzlich erforderliche Belege (z.B. Rechnungen bei kostenpflichtigen Diensten) bewahren wir nur für die gesetzliche Frist und ohne aktive Nutzung weiter auf."
+    },
+    "subjectPrefix": "Anfrage zur Kontolöschung",
+    "bodyText": "Bitte löscht mein Konto und alle zugehörigen Daten.\n\nMeine Account-E-Mail: \n(Optional) Weitere Infos: ",
+    "buttonRequest": "Löschung anfragen",
+    "altContact": "Alternativ schreib uns direkt an <email></email>.",
+    "responseTime": {
+      "title": "Bearbeitungszeit",
+      "body": "Wir bearbeiten Löschanfragen in der Regel innerhalb von 7 Werktagen und bestätigen den Abschluss per E-Mail."
+    }
+  },
+  "imprint": {
+    "metaTitle": "Impressum",
+    "metaDescription": "Angaben gemäß § 5 TMG.",
+    "kicker": "Impressum",
+    "title": "Impressum",
+    "tmg": {
+      "title": "Angaben gemäß § 5 TMG"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "emailLabel": "E-Mail:"
+    },
+    "vat": {
+      "title": "Umsatzsteuer",
+      "body": "Gemäß § 19 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet und ausgewiesen."
+    },
+    "responsibility": {
+      "title": "Verantwortlich für den Inhalt",
+      "body": "Silas Beckmann, Anschrift wie oben."
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss",
+      "content": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.",
+      "links": "Unser Angebot enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich."
+    },
+    "dispute": {
+      "title": "Streitbeilegung",
+      "body": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+    }
+  },
+  "terms": {
+    "metaTitle": "Nutzungsbedingungen",
+    "metaDescription": "Nutzungsbedingungen für die Preserve Food App und Website.",
+    "kicker": "Nutzungsbedingungen",
+    "title": "Nutzungsbedingungen",
+    "intro": "Diese Nutzungsbedingungen regeln die Nutzung der Preserve Food App und der zugehörigen Website. Mit der Anmeldung oder Nutzung erklärst du dich mit diesen Bedingungen einverstanden.",
+    "service": {
+      "title": "1. Leistungsbeschreibung",
+      "body": "Preserve Food ist eine mobile Anwendung zum Erfassen, Verwalten und Planen von Lebensmitteln, Rezepten und Mahlzeiten. Funktionen können sich im Laufe der Zeit ändern oder eingestellt werden.",
+      "tiers": "Die App steht in einer kostenlosen Basisversion sowie einer kostenpflichtigen Premium-Version („Preserve Food Pro“) zur Verfügung. Premium umfasst u.a. KI- und Scan-Funktionen (z.B. Barcode-Scan, automatische Erkennung) sowie erweiterte Mahlzeitenplanung."
+    },
+    "subscription": {
+      "title": "2. Abonnements & Bezahlung",
+      "intro": "Preserve Food Pro wird als monatliches Abonnement angeboten. Die Abwicklung erfolgt ausschließlich über den Apple App Store bzw. Google Play Store.",
+      "merchant": "Vertragspartner für den Kauf des Abonnements sind Apple Inc. (App Store) bzw. Google LLC (Google Play). Es gelten zusätzlich deren jeweilige Nutzungs- und Verkaufsbedingungen.",
+      "pricing": "Die aktuell gültigen Preise werden in der App und im jeweiligen Store angezeigt. Preise können sich ändern; Änderungen werden vor Wirksamwerden im Store kommuniziert.",
+      "renewal": "Die Zahlung wird beim Kaufabschluss von deinem Apple-ID- bzw. Google-Konto abgebucht. Das Abonnement verlängert sich automatisch um den gleichen Zeitraum, sofern es nicht mindestens 24 Stunden vor Ende der laufenden Periode gekündigt wird. Die Verlängerung wird innerhalb von 24 Stunden vor Ablauf der aktuellen Periode mit den Kosten der gewählten Abo-Option berechnet.",
+      "manage": "Abonnements können jederzeit in den Einstellungen deines Apple-ID- bzw. Google-Konto-Bereichs verwaltet und gekündigt werden. Eine Kündigung direkt über uns ist technisch nicht möglich.",
+      "withdrawal": "Mit dem Kaufabschluss und der sofortigen Bereitstellung des digitalen Inhalts erlischt das gesetzliche Widerrufsrecht (§ 356 Abs. 5 BGB). Rückerstattungsanfragen werden ausschließlich von Apple bzw. Google nach deren Richtlinien bearbeitet."
+    },
+    "account": {
+      "title": "3. Konto",
+      "body": "Für die Nutzung bestimmter Funktionen ist ein kostenloses Nutzerkonto erforderlich. Du bist verpflichtet, korrekte Angaben zu machen und dein Passwort vertraulich zu behandeln. Du bist für sämtliche Aktivitäten unter deinem Konto verantwortlich."
+    },
+    "age": {
+      "title": "4. Mindestalter",
+      "body": "Die Nutzung ist Personen ab 16 Jahren gestattet. Jüngere Nutzer benötigen die Zustimmung der Erziehungsberechtigten."
+    },
+    "userContent": {
+      "title": "5. Nutzerinhalte",
+      "body": "Du behältst alle Rechte an Inhalten, die du in die App einstellst (z.B. eigene Rezepte, Notizen, Fotos). Du räumst uns lediglich das Recht ein, diese Inhalte zur Bereitstellung der App technisch zu speichern und anzuzeigen.",
+      "responsibility": "Du bist allein verantwortlich für die Inhalte, die du hochlädst. Es ist untersagt, rechtswidrige, beleidigende oder rechteverletzende Inhalte einzustellen."
+    },
+    "conduct": {
+      "title": "6. Verhaltensregeln",
+      "intro": "Bei der Nutzung der App ist insbesondere untersagt:",
+      "item1": "die App in einer Weise zu nutzen, die geltendes Recht verletzt;",
+      "item2": "die technische Infrastruktur zu stören, zu überlasten oder zu umgehen;",
+      "item3": "Konten anderer zu missbrauchen oder fremde Zugangsdaten zu verwenden;",
+      "item4": "automatisierte Skripte (Bots, Scraper) ohne unsere Zustimmung einzusetzen."
+    },
+    "availability": {
+      "title": "7. Verfügbarkeit",
+      "body": "Wir bemühen uns um eine möglichst hohe Verfügbarkeit, gewährleisten aber keine unterbrechungsfreie Nutzung. Wartungen, technische Störungen oder höhere Gewalt können zu vorübergehenden Einschränkungen führen."
+    },
+    "termination": {
+      "title": "8. Beendigung",
+      "body": "Du kannst dein Konto jederzeit über die Seite „Konto löschen“ kündigen. Wir behalten uns vor, Konten bei schwerwiegenden oder wiederholten Verstößen gegen diese Bedingungen zu sperren oder zu löschen."
+    },
+    "liability": {
+      "title": "9. Haftung",
+      "body": "Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie nach den Vorschriften des Produkthaftungsgesetzes. Für leichte Fahrlässigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten und begrenzt auf den vertragstypischen, vorhersehbaren Schaden. Eine darüber hinausgehende Haftung ist ausgeschlossen."
+    },
+    "changes": {
+      "title": "10. Änderungen",
+      "body": "Wir können diese Nutzungsbedingungen ändern, soweit dies aus rechtlichen, technischen oder organisatorischen Gründen erforderlich ist. Über wesentliche Änderungen informieren wir per E-Mail oder in der App; sie gelten ab dem in der Mitteilung genannten Datum."
+    },
+    "law": {
+      "title": "11. Anwendbares Recht & Gerichtsstand",
+      "body": "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur, soweit nicht zwingende Verbraucherschutzvorschriften des Wohnsitzstaates entgegenstehen."
+    },
+    "severability": {
+      "title": "12. Salvatorische Klausel",
+      "body": "Sollte eine Bestimmung dieser Nutzungsbedingungen unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt."
+    }
+  }
+}
