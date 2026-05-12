@@ -75,6 +75,7 @@ export default async function PrivacyPage({
         <ul className="list-disc space-y-2 pl-5">
           <li>{t("thirdParty.supabase")}</li>
           <li>{t("thirdParty.vercel")}</li>
+          <li>{t("thirdParty.ai")}</li>
           <li>{t("thirdParty.stores")}</li>
         </ul>
       </LegalSection>

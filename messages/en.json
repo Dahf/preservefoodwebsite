@@ -44,6 +44,7 @@
       "intro": "The following providers process data on our behalf:",
       "supabase": "Supabase Inc. – database hosting and authentication (EU servers, data processing agreement in place).",
       "vercel": "Vercel Inc. / hosting provider – technical operation of the website.",
+      "ai": "AI providers based in the USA – specifically OpenAI, L.L.C. (OpenAI API), Anthropic, PBC (Claude API) and Perplexity AI, Inc. (Perplexity API). These providers process requests for the app's AI-powered features (e.g. recipe suggestions, automatic recognition, research). Only generic, anonymised queries are sent to the AI providers – no personal data and no free-text user input. Data processing agreements (DPAs) are in place with OpenAI and Anthropic; data transfer to the USA is based on the EU Standard Contractual Clauses (Art. 46(2)(c) GDPR). The providers have contractually agreed not to use submitted API content to train their models.",
       "stores": "Apple App Store / Google Play Store – distribution of the mobile app; their privacy notices apply in addition."
     },
     "cookies": {
@@ -172,28 +173,33 @@
       "item3": "misuse other people's accounts or use third-party credentials;",
       "item4": "run automated scripts (bots, scrapers) without our consent."
     },
+    "thirdPartyContent": {
+      "title": "7. Third-party content & AI features",
+      "body": "The app uses AI features powered by external providers (OpenAI, Anthropic / Claude, Perplexity). AI-generated content (e.g. recipe suggestions, texts) is created automatically and may be inaccurate, incomplete or misleading. It is not a substitute for nutritional, medical or other professional advice. You use AI results at your own risk and should independently verify them before making important decisions (e.g. regarding allergies, food intolerances or health-related topics).",
+      "rights": "All third-party content displayed in the app is used with the respective necessary rights."
+    },
     "availability": {
-      "title": "7. Availability",
+      "title": "8. Availability",
       "body": "We aim for high availability but do not guarantee uninterrupted service. Maintenance, technical issues or force majeure may cause temporary limitations."
     },
     "termination": {
-      "title": "8. Termination",
+      "title": "9. Termination",
       "body": "You can terminate your account at any time via the „Delete account“ page. We reserve the right to suspend or delete accounts in case of serious or repeated breaches of these terms."
     },
     "liability": {
-      "title": "9. Liability",
+      "title": "10. Liability",
       "body": "We are liable without limitation for intent and gross negligence and under the German Product Liability Act. For slight negligence we are only liable in case of breach of essential contractual duties and limited to typical, foreseeable damages. Any further liability is excluded."
     },
     "changes": {
-      "title": "10. Changes",
+      "title": "11. Changes",
       "body": "We may amend these Terms where legally, technically or organisationally necessary. We will inform you about material changes by email or in the app; changes take effect on the date stated in the notice."
     },
     "law": {
-      "title": "11. Governing law & jurisdiction",
+      "title": "12. Governing law & jurisdiction",
       "body": "These Terms are governed by the law of the Federal Republic of Germany, excluding the UN Convention on Contracts for the International Sale of Goods. For consumers this choice of law applies only insofar as mandatory consumer protection rules of their country of residence do not conflict."
     },
     "severability": {
-      "title": "12. Severability",
+      "title": "13. Severability",
       "body": "Should any provision of these Terms be or become invalid, the validity of the remaining provisions remains unaffected."
     }
   }

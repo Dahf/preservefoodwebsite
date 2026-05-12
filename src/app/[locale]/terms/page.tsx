@@ -63,6 +63,11 @@ export default async function TermsPage({
         </ul>
       </LegalSection>
 
+      <LegalSection title={t("thirdPartyContent.title")}>
+        <p>{t("thirdPartyContent.body")}</p>
+        <p>{t("thirdPartyContent.rights")}</p>
+      </LegalSection>
+
       <LegalSection title={t("availability.title")}>
         <p>{t("availability.body")}</p>
       </LegalSection>

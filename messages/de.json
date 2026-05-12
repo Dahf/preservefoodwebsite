@@ -44,6 +44,7 @@
       "intro": "Folgende Dienstleister verarbeiten Daten in unserem Auftrag:",
       "supabase": "Supabase Inc. – Hosting der Datenbank und Auth (Server in der EU, Auftragsverarbeitungsvertrag abgeschlossen).",
       "vercel": "Vercel Inc. / Hosting-Provider – technischer Betrieb der Website.",
+      "ai": "KI-Dienstleister mit Sitz in den USA – konkret OpenAI, L.L.C. (OpenAI API), Anthropic, PBC (Claude API) und Perplexity AI, Inc. (Perplexity API). Diese verarbeiten Anfragen für die KI-gestützten Funktionen der App (z.B. Rezeptvorschläge, automatische Erkennung, Recherche). An die KI-Anbieter werden ausschließlich generische, anonymisierte Anfragen übermittelt – keine personenbezogenen Daten und kein vom Nutzer eingegebener Freitext. Mit OpenAI und Anthropic bestehen Auftragsverarbeitungsverträge (Data Processing Addendum); die Übermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Die Anbieter haben sich vertraglich verpflichtet, übermittelte API-Inhalte nicht zum Trainieren ihrer Modelle zu verwenden.",
       "stores": "Apple App Store / Google Play Store – Auslieferung der mobilen App; deren Datenschutzhinweise gelten zusätzlich."
     },
     "cookies": {
@@ -172,28 +173,33 @@
       "item3": "Konten anderer zu missbrauchen oder fremde Zugangsdaten zu verwenden;",
       "item4": "automatisierte Skripte (Bots, Scraper) ohne unsere Zustimmung einzusetzen."
     },
+    "thirdPartyContent": {
+      "title": "7. Drittanbieter-Inhalte & KI-Funktionen",
+      "body": "Die App nutzt KI-Funktionen, die über externe Dienstleister bereitgestellt werden (OpenAI, Anthropic / Claude, Perplexity). KI-generierte Inhalte (z.B. Rezeptvorschläge, Texte) werden automatisiert erstellt und können fehlerhaft, unvollständig oder ungenau sein. Sie ersetzen insbesondere keine ernährungswissenschaftliche, medizinische oder fachliche Beratung. Du nutzt KI-Ergebnisse auf eigene Verantwortung und solltest sie vor wichtigen Entscheidungen (z.B. bei Allergien, Lebensmittelunverträglichkeiten, gesundheitlichen Themen) eigenständig überprüfen.",
+      "rights": "Alle in der App angezeigten Drittanbieter-Inhalte werden mit den jeweils erforderlichen Nutzungsrechten verwendet."
+    },
     "availability": {
-      "title": "7. Verfügbarkeit",
+      "title": "8. Verfügbarkeit",
       "body": "Wir bemühen uns um eine möglichst hohe Verfügbarkeit, gewährleisten aber keine unterbrechungsfreie Nutzung. Wartungen, technische Störungen oder höhere Gewalt können zu vorübergehenden Einschränkungen führen."
     },
     "termination": {
-      "title": "8. Beendigung",
+      "title": "9. Beendigung",
       "body": "Du kannst dein Konto jederzeit über die Seite „Konto löschen“ kündigen. Wir behalten uns vor, Konten bei schwerwiegenden oder wiederholten Verstößen gegen diese Bedingungen zu sperren oder zu löschen."
     },
     "liability": {
-      "title": "9. Haftung",
+      "title": "10. Haftung",
       "body": "Wir haften unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie nach den Vorschriften des Produkthaftungsgesetzes. Für leichte Fahrlässigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten und begrenzt auf den vertragstypischen, vorhersehbaren Schaden. Eine darüber hinausgehende Haftung ist ausgeschlossen."
     },
     "changes": {
-      "title": "10. Änderungen",
+      "title": "11. Änderungen",
       "body": "Wir können diese Nutzungsbedingungen ändern, soweit dies aus rechtlichen, technischen oder organisatorischen Gründen erforderlich ist. Über wesentliche Änderungen informieren wir per E-Mail oder in der App; sie gelten ab dem in der Mitteilung genannten Datum."
     },
     "law": {
-      "title": "11. Anwendbares Recht & Gerichtsstand",
+      "title": "12. Anwendbares Recht & Gerichtsstand",
       "body": "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Gegenüber Verbrauchern gilt diese Rechtswahl nur, soweit nicht zwingende Verbraucherschutzvorschriften des Wohnsitzstaates entgegenstehen."
     },
     "severability": {
-      "title": "12. Salvatorische Klausel",
+      "title": "13. Salvatorische Klausel",
       "body": "Sollte eine Bestimmung dieser Nutzungsbedingungen unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt."
     }
   }
