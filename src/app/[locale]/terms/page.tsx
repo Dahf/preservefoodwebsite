@@ -23,9 +23,15 @@ export default async function TermsPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("terms");
+  const tCommon = await getTranslations("common");
+  const lastUpdated = locale === "de" ? "14. Mai 2026" : "May 14, 2026";
 
   return (
     <LegalShell kicker={t("kicker")} title={t("title")} intro={t("intro")}>
+      <p className="text-sm text-muted-foreground">
+        {tCommon("lastUpdated", { date: lastUpdated })}
+      </p>
+
       <LegalSection title={t("service.title")}>
         <p>{t("service.body")}</p>
         <p>{t("service.tiers")}</p>
@@ -38,6 +44,12 @@ export default async function TermsPage({
         <p>{t("subscription.renewal")}</p>
         <p>{t("subscription.manage")}</p>
         <p>{t("subscription.withdrawal")}</p>
+      </LegalSection>
+
+      <LegalSection title={t("apple.title")}>
+        <p>{t("apple.body")}</p>
+        <p>{t("apple.beneficiary")}</p>
+        <p>{t("apple.precedence")}</p>
       </LegalSection>
 
       <LegalSection title={t("account.title")}>

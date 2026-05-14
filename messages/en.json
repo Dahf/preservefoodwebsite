@@ -66,7 +66,19 @@
     },
     "deletion": {
       "title": "Account deletion",
-      "body": "You can request deletion of your account and all related data at any time. See our dedicated „Delete account“ page for instructions."
+      "body": "You can delete your account and all related data at any time directly in the app (Settings → „Delete account“). Alternatively, you can request deletion via our dedicated „Delete account“ page."
+    },
+    "auth": {
+      "title": "Sign in with Apple / Sign in with Google",
+      "body": "When you register via „Sign in with Apple“ or „Sign in with Google“, we receive your name (only on your very first sign-in) and an email address from Apple or Google — with „Sign in with Apple“ this may be a private Apple Relay address. We use this data solely to create your Preserve Food account. Legal basis: Art. 6(1)(b) GDPR (performance of a contract). Provider privacy policies: Apple (https://www.apple.com/legal/privacy/), Google (https://policies.google.com/privacy)."
+    },
+    "health": {
+      "title": "Allergens & dietary preferences",
+      "body": "Within the app you may optionally enter allergens (e.g. gluten, milk, nuts) and dietary preferences (e.g. vegetarian, vegan). This information may constitute health data within the meaning of Art. 9(1) GDPR. We process it solely on the basis of your explicit consent (Art. 9(2)(a) GDPR) and use it only to suggest matching recipes and filter content. You can withdraw your consent at any time in the app settings by removing the relevant entries."
+    },
+    "children": {
+      "title": "Children & minors",
+      "body": "The Preserve Food app is not intended for users under 16 years of age. We do not knowingly collect personal data from children under that age. If you are a parent or legal guardian and become aware that your child has provided us with personal data, please contact us at mail@preservefood.de — we will delete the data promptly."
     },
     "contact": {
       "title": "Contact",
@@ -141,13 +153,19 @@
     "service": {
       "title": "1. Service description",
       "body": "Preserve Food is a mobile application for capturing, managing and planning groceries, recipes and meals. Features may change or be discontinued over time.",
-      "tiers": "The app is offered in a free basic version and a paid premium version („Preserve Food Pro“). Premium includes AI and scan features (e.g. barcode scanning, automatic recognition) as well as advanced meal planning."
+      "tiers": "The app is offered in a free basic version and a paid premium version („Preserve Food Pro“). Premium includes receipt scanning, photo scanning for automatic food recognition, and higher daily quotas for pantry analysis and AI-powered meal planning. Barcode scanning and managing your inventory, recipes and shopping lists are included in the free version."
+    },
+    "apple": {
+      "title": "2a. Apple Standard EULA",
+      "body": "In addition to these Terms, your use of the Preserve Food app downloaded from the Apple App Store is governed by Apple's „Licensed Application End User License Agreement“ (Standard EULA), available at https://www.apple.com/legal/internet-services/itunes/dev/stdeula/.",
+      "beneficiary": "Apple Inc. and its subsidiaries are third-party beneficiaries of these Terms and are entitled to enforce them against end users.",
+      "precedence": "In the event of a conflict between these Terms and Apple's Standard EULA, the Standard EULA prevails with respect to software-license matters (scope of license, maintenance, warranty, product claims, intellectual property, and legal compliance)."
     },
     "subscription": {
       "title": "2. Subscriptions & payment",
       "intro": "Preserve Food Pro is offered as a monthly subscription. All purchases are processed exclusively through the Apple App Store or Google Play Store.",
       "merchant": "The contractual partner for the purchase of the subscription is Apple Inc. (App Store) or Google LLC (Google Play). Their respective terms of use and sale apply in addition.",
-      "pricing": "Currently valid prices are displayed in the app and in the respective store. Prices may change; changes will be communicated in the store before they take effect.",
+      "pricing": "Preserve Food Pro currently costs $3.99 per month (as of May 14, 2026). Localized prices apply depending on App Store region; the applicable price is shown in the app and the store before purchase. Prices may change; changes will be communicated in the store before they take effect.",
       "renewal": "Payment will be charged to your Apple ID or Google account upon confirmation of purchase. The subscription automatically renews for the same period unless cancelled at least 24 hours before the end of the current period. The renewal will be charged within 24 hours prior to the end of the current period at the cost of the selected subscription option.",
       "manage": "Subscriptions can be managed and cancelled at any time in the settings of your Apple ID or Google account. Cancellation directly with us is technically not possible.",
       "withdrawal": "With the completion of the purchase and the immediate provision of the digital content, the statutory right of withdrawal expires (§ 356(5) German Civil Code). Refund requests are processed exclusively by Apple or Google in accordance with their policies."

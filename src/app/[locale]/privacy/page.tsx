@@ -25,6 +25,7 @@ export default async function PrivacyPage({
   const t = await getTranslations("privacy");
   const tCommon = await getTranslations("common");
   const email = tCommon("supportEmail");
+  const lastUpdated = locale === "de" ? "14. Mai 2026" : "May 14, 2026";
 
   return (
     <LegalShell
@@ -32,6 +33,10 @@ export default async function PrivacyPage({
       title={t("title")}
       intro={t("intro")}
     >
+      <p className="text-sm text-muted-foreground">
+        {tCommon("lastUpdated", { date: lastUpdated })}
+      </p>
+
       <LegalSection title={t("controller.title")}>
         <p>{t("controller.body")}</p>
         <address className="not-italic">
@@ -78,6 +83,18 @@ export default async function PrivacyPage({
           <li>{t("thirdParty.ai")}</li>
           <li>{t("thirdParty.stores")}</li>
         </ul>
+      </LegalSection>
+
+      <LegalSection title={t("auth.title")}>
+        <p>{t("auth.body")}</p>
+      </LegalSection>
+
+      <LegalSection title={t("health.title")}>
+        <p>{t("health.body")}</p>
+      </LegalSection>
+
+      <LegalSection title={t("children.title")}>
+        <p>{t("children.body")}</p>
       </LegalSection>
 
       <LegalSection title={t("cookies.title")}>
